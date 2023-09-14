@@ -27,7 +27,17 @@ button {
 }
 .scrollItem {
   overflow: auto;
+  scroll-behavior: smooth;
+
+  -ms-overflow-style: none;  /* 隱藏滾動條 IE and Edge */
+  scrollbar-width: none;  /* 隱藏滾動條 Firefox */
 }
+/*會有相容性的問題，隱藏滾動條。scrollbar,for Chrome, Safari and Opera*/
+.scrollItem::-webkit-scrollbar {
+  display: none;
+}
+
+
 #timeline{
   margin-right: 5px;
 }

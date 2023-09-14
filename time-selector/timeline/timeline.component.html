@@ -4,8 +4,8 @@
       <p-panelMenu [model]="yearsMenu"></p-panelMenu>
   </div>
 
-  <div class="card scrollItem" id="timeline">
-    <p-timeline [value]="timelineRecord">
+  <div class="card scrollItem" id="scrollTable">
+    <p-timeline [value]="timelineRecord" id="timeline">
       <ng-template pTemplate="marker" let-event>
         <span class="custom-marker shadow-2" [style.backgroundColor]="event.color" [style]="event.style"></span>
         <span class="custom-connect" [class]="event.class"></span>
