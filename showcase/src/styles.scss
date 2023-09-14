@@ -1,0 +1,117 @@
+/* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files */
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+
+button {
+  display: inline; /* 保證內容正常顯示 */
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font-size: inherit;
+  color: inherit;
+  cursor: pointer;
+  width: 60px;
+}
+
+.forFlex{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  height: 70%;
+}
+
+.outside{
+  height: 98vh;
+}
+.scrollItem{
+  overflow: auto;
+}
+#timeline{
+  margin-right: 5px;
+}
+
+:host ::ng-deep .menuStyling {
+  font-size: 100px !important;
+  font-weight: bold !important;
+  font-style: italic !important;
+  font-family: cursive !important;
+}
+
+.ulSelect {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 200px;
+  background-color: #f1f1f1;
+}
+
+.liSelect {
+  display: block;
+  color: #000;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+/* Change the link color on hover */
+.liSelect:hover {
+  background-color: #555;
+  color: white;
+}
+
+.p-submenu-icon{
+  display:none;
+}
+
+.p-timeline .p-timeline-event-marker{
+  background-color: blue;
+}
+
+.p-panelmenu{
+  width: 60px;
+}
+/** 將panelmanu 邊界移除*/
+.p-panelmenu .p-panelmenu-header .p-panelmenu-header-content{
+  border:none
+}
+/** 將panelmanu subcontent邊界移除*/
+.p-panelmenu .p-panelmenu-content {
+  border:none
+}
+
+.p-panelmenu .p-panelmenu-header .p-panelmenu-header-content .p-panelmenu-header-action{
+  color: #000;
+  padding: 5px;
+  justify-content: center;
+}
+.p-panelmenu .p-panelmenu-content .p-menuitem > .p-menuitem-content .p-menuitem-link{
+  padding: 5px;
+  // justify-content: center;
+  font-size: medium;
+}
+/** scroll tab add navigator*/
+.navigator {
+  // position: fixed;
+  top: 50%;
+  // transform: translateY(-50%);
+  right: 10px;
+  /* Adjust styling as needed */
+}
+
+/**修改lsitbox 內容樣式*/
+.p-listbox .p-listbox-list .p-listbox-item.p-highlight{
+  font-size: larger;
+  border-radius: var(--border-radius-rounded, 20px);
+  border: 1px solid var(--primary-main, #006D50);
+  color: white;
+  background: #006D50;
+}
+.p-listbox .p-listbox-list .p-listbox-item{
+  justify-content: space-between;
+  margin: 2px;
+  padding: var(--spacing-xs, 4px) var(--spacing-md, 12px);
+}
+.listbox-font{
+  font-weight: 300;
+}
