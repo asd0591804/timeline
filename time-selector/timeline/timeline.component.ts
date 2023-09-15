@@ -1,10 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+/* eslint-disable @typescript-eslint/no-inferrable-types */
+import { Component, ElementRef, HostListener, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PanelMenuModule } from 'primeng/panelmenu';
 import { MenuItem } from 'primeng/api';
 import { TimelineModule } from 'primeng/timeline';
 import { DetailData, TimeRecord } from 'time-selector/src/lib/timerecord';
 import '@his-base/array-extention';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'his-timeline',
@@ -20,13 +22,17 @@ export class TimelineComponent implements OnInit{
   changeTypeRecord: object[]=[];
   timelineRecord !:object[];
   previousSelect!: DetailData;
+  inTimeline!: boolean;
+  clicked:boolean = false;
+
+  constructor(private formBuilder: FormBuilder,private el: ElementRef) {}
 
   ngOnInit(): void {
     const sortTimes = this.sortTimeRecord(this.diseaseRecord);
     const groupTimes = this.groupbyTimeRecord(sortTimes);
     const getYearMonths = this.getYearMonth(groupTimes);
     this.yearsMenu = getYearMonths;
-}
+  }
 
   sortTimeRecord(records:TimeRecord[]){
     return records.sort((a, b) => a.date.getTime() - b.date.getTime());
@@ -84,10 +90,64 @@ export class TimelineComponent implements OnInit{
         const timeline = document.getElementById('timeline');
         if (timeline){
           const percent = height / total;
+          console.log(timeline.scrollTop);
           const target = (percent)*(timeline.offsetHeight)-10;
           scrollBody?.scrollTo(0,target);
         }
       }, 5);
     });
+  }
+
+  onClickActive(){
+    // const yearPanel = document.getElementById('yearsPanel');
+    // yearPanel.active()
+    console.log('----');
+    const x = '2021'
+    const searchLabel = '[aria-label="'+x+'"]'
+    const yearsPanel = document.querySelector(searchLabel);
+    console.log(yearsPanel);
+    const clickEvent = new MouseEvent('click', {
+      bubbles: true,
+      cancelable: true,
+      view: window,
+    });
+    if(yearsPanel){
+      yearsPanel.dispatchEvent(clickEvent);
+    }
+  }
+  onCheckMouseIn(){
+    this.inTimeline = true;
+  }
+  onCheckMouseOut(){
+    this.inTimeline = false;
+  }
+
+  @HostListener('scroll', ['$event']) onElementScroll($event: any) {
+    // console.log($event.offsetTop); //有監聽到事件
+    const modal= this.el.nativeElement.querySelector('#scrollTable');
+    console.log(modal.scrollTop);
+
+    const x = '1997'
+    const searchLabel = '[aria-label="'+x+'"]'
+    const yearsPanel = document.querySelector(searchLabel);
+    console.log(yearsPanel);
+    const clickEvent = new MouseEvent('click', {
+      bubbles: true,
+      cancelable: true,
+      view: window,
+    });
+    if(yearsPanel){
+      const ariaExpanded = yearsPanel.getAttribute('aria-expanded');
+      const isSelected = ariaExpanded === "true";
+      if(!isSelected && this.inTimeline){
+        yearsPanel.dispatchEvent(clickEvent);
+      }
+    }
+
+  }
+
+   reverseBoolean(value: boolean) {
+    console.log('in function value :' , value);
+    return !value;
   }
 }

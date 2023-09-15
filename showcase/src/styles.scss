@@ -131,7 +131,7 @@ button {
 }
 
 .p-panelmenu .p-panelmenu-header:not(.p-disabled).p-highlight .p-panelmenu-header-content {
-  background-color: rgb(255, 166, 0);
+  background-color: #FDD3A4;
   color: #006D50;
   border-radius: 8px;
 }
@@ -148,7 +148,7 @@ button {
 .eachconnent-select{
   height: 80px;
   width: 2px;
-  background-color: rgb(199, 117, 22);
+  background-color: var(--tertiary-main, #C77516);
   flex-grow: 1;
   //提供動畫效果，屬性改變的持續時間和過渡函數
   transition: all 0.3s ease;
@@ -162,6 +162,16 @@ button {
   padding-left: 8px;
 }
 
+.timeline-width{
+  width: 300px;
+}
+
+// .p-toggleable-content {
+//   background-color: #FDD3A4;
+// }
+.p-panelmenu .p-panelmenu-content .p-menuitem:not(.p-highlight):not(.p-disabled) > .p-menuitem-content:hover {
+  background-color: #FDD3A4;
+}
 // .p-panelmenu .p-panelmenu-header:not(.p-disabled).p-highlight .p-panelmenu-header-content{
 //   border-radius: 8px;
 // }
