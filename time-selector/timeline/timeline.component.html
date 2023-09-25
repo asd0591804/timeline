@@ -4,16 +4,20 @@
   <div class="card flex justify-content-center scrollItem">
       <p-panelMenu [model]="yearsMenu" id="yearsPanel"></p-panelMenu>
   </div>
+
   <div class="card scrollItem" id="scrollTable" (scroll)="onElementScroll()" (mouseover)="onCheckMouseIn()" (mouseleave)="onCheckMouseOut()">
     <p-timeline [value]="timelineRecord" id="timeline">
       <ng-template pTemplate="marker" let-event>
-        <span class="custom-marker shadow-2" [style.backgroundColor]="event.color" [style]="event.style"></span>
-        <span class="custom-connect" [class]="event.class"></span>
+        <span class="custom-marker shadow-2" [style.backgroundColor]="event.class.dotColor" [class]="event.class.dotStyle"></span>
+        <span class="custom-connect" [class]="event.class.connectStyle"></span>
       </ng-template>
       <ng-template pTemplate="content" let-event>
-        <button (click)="onSelectTime(event)" >{{ event.time }} <br>
-            <small class="p-text-secondary">{{ event.subtitle }}</small><br>
-            <small class="p-text-secondary listbox-font">{{ event.title }}</small>
+        <button (click)="onSelectTime(event)" [class]="event.class.time">
+          <div style="line-height: 150%;">
+            {{ event.time }} <br>
+            <span [class]="event.class.title">{{ event.subtitle }}</span><br>
+            <span [class]="event.class.subtitle">{{ event.title }}</span>
+          </div>
         </button>
       </ng-template>
     </p-timeline>

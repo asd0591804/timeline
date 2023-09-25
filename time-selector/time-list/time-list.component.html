@@ -1,1 +1,9 @@
-<p>time-list works!</p>
+<div class="card flex justify-content-center scrollItem">
+  <p-listbox [options]="listDetail" [(ngModel)]="selectedList" optionLabel="title" (onClick)="onEmitFuntion(selectedList)" [style]="{'width':'15rem'}">
+    <ng-template let-list pTemplate="item">
+      <div>
+          <div class="pi pi-file"> &nbsp;{{list.title}}</div>
+      </div>
+    </ng-template>
+  </p-listbox>
+</div>

@@ -12,7 +12,7 @@ button {
   font-size: inherit;
   color: inherit;
   cursor: pointer;
-  width: 60px;
+  width: 80px;
 }
 
 .forFlex{
@@ -81,6 +81,15 @@ button {
 .p-panelmenu{
   width: 60px;
 }
+.p-panelmenu .p-panelmenu-header > a:active {
+  box-shadow: none;
+  color: #006D50;
+}
+
+//刪除點選後有藍色外框
+.p-panelmenu .p-panelmenu-header:not(.p-disabled):focus .p-panelmenu-header-content{
+  box-shadow: none;
+}
 /** 將panelmanu 邊界移除*/
 .p-panelmenu .p-panelmenu-header .p-panelmenu-header-content{
   border:none
@@ -88,6 +97,9 @@ button {
 /** 將panelmanu subcontent邊界移除*/
 .p-panelmenu .p-panelmenu-content {
   border:none
+}
+.ui-panelmenu .ui-panelmenu-header.ui-state-active{
+  border-color: none ;
 }
 
 .p-panelmenu .p-panelmenu-header .p-panelmenu-header-content .p-panelmenu-header-action{
@@ -108,7 +120,9 @@ button {
   right: 10px;
   /* Adjust styling as needed */
 }
-
+.p-listbox .p-listbox-list {
+  padding: 0 !important;
+}
 /**修改lsitbox 內容樣式*/
 .p-listbox .p-listbox-list .p-listbox-item.p-highlight{
   font-size: larger;
@@ -119,9 +133,26 @@ button {
 }
 .p-listbox .p-listbox-list .p-listbox-item{
   justify-content: space-between;
-  margin: 2px;
+  margin: 5px;
   padding: var(--spacing-xs, 4px) var(--spacing-md, 12px);
+  border-bottom: solid 1px #B5BFBB;
 }
+.p-listbox .p-listbox-list .p-listbox-item::after{
+  border-bottom: solid 1px #B5BFBB;
+}
+
+.p-listbox-list{
+  height: 48vh;
+}
+
+.box-border{
+  position:relative;
+  left:25px;
+  width:50px;
+  height:1px;
+  border-bottom:1px solid #B5BFBB;
+}
+
 .listbox-font{
   font-weight: 300;
 }
@@ -135,10 +166,16 @@ button {
   color: #006D50;
   border-radius: 8px;
 }
+.dot-style{
+  border: 0px solid #3C6353;
+  border-radius: 50%;
+  width: 1rem;
+  height: 1rem;
+}
 
 //timeline connet style，點和點之間連接的線，找到可以修改css的方法了
 .eachconnent{
-  height: 60px;
+  height: 75px;
   width: 2px;
   background-color: #dee2e6;
   flex-grow: 1;
@@ -146,7 +183,7 @@ button {
   transition: all 0.3s ease;
 }
 .eachconnent-select{
-  height: 80px;
+  height: 90px;
   width: 2px;
   background-color: var(--tertiary-main, #C77516);
   flex-grow: 1;
@@ -163,7 +200,7 @@ button {
 }
 
 .timeline-width{
-  width: 300px;
+  // width: 300px;
 }
 
 // .p-toggleable-content {
@@ -175,3 +212,71 @@ button {
 // .p-panelmenu .p-panelmenu-header:not(.p-disabled).p-highlight .p-panelmenu-header-content{
 //   border-radius: 8px;
 // }
+
+.button-time{
+  overflow: hidden;
+  color: var(--surface-on-surface, #1C1D1C);
+  text-overflow: ellipsis;
+  /* Body/Medium */
+  font-family: Noto Sans TC;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px; /* 125% */
+  letter-spacing: 0.16px;
+  text-align: left;
+}
+
+.fontsize {
+  color: var(--surface-on-surface, #1C1D1C);
+  /* Label/Medium */
+  font-family: Noto Sans TC;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px; /* 150% */
+  letter-spacing: 0.16px;
+}
+.fontsize-caption{
+  color: var(--surface-on-surface, #1C1D1C);
+  /* Caption/Medium */
+  font-family: Noto Sans TC;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 20px; /* 142.857% */
+  letter-spacing: 0.14px;
+}
+.button-time-selected{
+  color: var(--surface-on-surface, #1C1D1C);
+  /* Body/Large */
+  font-family: Noto Sans TC;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px; /* 133.333% */
+  letter-spacing: 0.18px;
+  text-align: left;
+  }
+
+.fontsize-selected{
+  color: var(--surface-on-surface, #1C1D1C);
+
+  /* Label/Large */
+  font-family: Noto Sans TC;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px; /* 133.333% */
+  letter-spacing: 0.18px;
+}
+.fontsize-caption-selected{
+  color: var(--surface-on-surface, #1C1D1C);
+  /* Caption/Large */
+  font-family: Noto Sans TC;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 24px; /* 150% */
+  letter-spacing: 0.16px;
+}
