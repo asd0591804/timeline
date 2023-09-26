@@ -17,7 +17,7 @@ import { TimelineService } from './timeline.service';
 })
 export class TimelineComponent implements OnInit{
   /**傳入的歷程資料 */
-  @Input() diseaseRecord!: TimeRecord[];
+  @Input() record!: TimeRecord[];
   /**發送給 timelist 的值 */
   @Output() list = new EventEmitter();
 
@@ -31,9 +31,9 @@ export class TimelineComponent implements OnInit{
   constructor(private el: ElementRef) {}
 
   ngOnInit(): void {
-    this.#timelineService.setInitRecord(this.diseaseRecord);
+    this.#timelineService.setInitRecord(this.record);
 
-    const sortTimes = this.#timelineService.sortTimeRecord(this.diseaseRecord);
+    const sortTimes = this.#timelineService.sortTimeRecord(this.record);
     const groupTimes = this.#timelineService.groupbyTimeRecord(sortTimes);
     this.yearsMenu = this.#timelineService.getYearMonth(groupTimes);
     this.timelineRecord = this.#timelineService.changeDataInTimeline();

@@ -1,5 +1,5 @@
 {
-  "name": "timeline",
+  "name": "his-timeline",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -23,6 +23,7 @@
     "@angular/platform-browser-dynamic": "^16.1.0",
     "@angular/router": "^16.1.0",
     "@his-base/array-extention": "git+https://gitlab.aservice.com.tw/hpc-his/base/array-extension.git",
+    "@his-base/data-extension":"git+https://gitlab.aservice.com.tw/hpc-his/base/date-extension.git",
     "eslint-config-prettier": "^9.0.0",
     "primeicons": "^6.0.1",
     "primeng": "^16.2.0",

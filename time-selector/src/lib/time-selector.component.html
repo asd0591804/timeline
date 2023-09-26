@@ -1,0 +1,6 @@
+<div class="outside">
+  <div class="forFlex">
+    <his-timeline [record]="record" (list)="onUpdateRecord($event)"></his-timeline>
+    <his-time-list [list]="timelineOutputList" (value)="onGetDetail($event)"></his-time-list>
+  </div>
+</div>

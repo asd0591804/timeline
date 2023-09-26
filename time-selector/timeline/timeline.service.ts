@@ -60,7 +60,7 @@ export class TimelineService {
   changeDataInTimeline(){
     this.#changeTypeRecord = [];
     this.diseaseRecord.forEach((a) => {
-      const monthDay = (a.date.getMonth()+1).toString().padStart(2, "0")+'-'+a.date.getDate();
+      const monthDay = a.date.formatString('MM-DD');
       const nowRecord = {time: monthDay, title: a.title, subtitle: a.subtitle, class: this.#cssClass, id: a.id};
       this.#changeTypeRecord = [...this.#changeTypeRecord, nowRecord];
     });

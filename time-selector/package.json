@@ -1,5 +1,5 @@
 {
-  "name": "time-selector",
+  "name": "his-time-selector",
   "version": "0.0.1",
   "peerDependencies": {
     "@angular/common": "^16.1.0",

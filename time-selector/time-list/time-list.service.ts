@@ -1,5 +1,6 @@
 import { TimeRecord } from 'time-selector/src/lib/timerecord';
 import { Injectable } from '@angular/core';
+import '@his-base/data-extension';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,8 @@ export class TimeListService {
     if(!listDetail) return [{title: "請點選資料"}];
 
     return list.map((a) => {
-      return {title: (a.date.getMonth()+1).toString().padStart(2, "0")+'-'+a.date.getDate()+' '+a.date.getHours()+':'+a.date.getMinutes()+' '+ a.title,id:a.id};
+      const newTitle = a.date.formatString('MM-DD HH:mm '+a.title)
+      return {title: newTitle, id: a.id};
     })
   }
 
