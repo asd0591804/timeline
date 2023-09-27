@@ -12,13 +12,15 @@
         <span class="custom-connect eachconnent" [ngClass]="{'eachconnent-select':record.selected}"></span>
       </ng-template>
       <ng-template pTemplate="content" let-record>
-        <button (click)="onSelectTime(record)" class="button-time" [ngClass]="{'button-time-selected':record.selected}">
-          <div style="line-height: 150%;">
-            {{ record.time }} <br>
-            <span class="fontsize" [ngClass]="{'fontsize-selected':record.selected}">{{ record.subtitle }}</span><br>
-            <span class="fontsize-caption" [ngClass]="{'fontsize-caption-selected':record.selected}">{{ record.title }}</span>
-          </div>
-        </button>
+        <div [ngClass]="{'triangle':record.selected}" style="display: flex;">
+          <button (click)="onSelectTime(record)" class="button-time" [ngClass]="{'button-time-selected':record.selected}">
+            <div style="line-height: 150%;">
+              {{ record.time }} <br>
+              <span class="fontsize" [ngClass]="{'fontsize-selected':record.selected}">{{ record.subtitle }}</span><br>
+              <span class="fontsize-caption" [ngClass]="{'fontsize-caption-selected':record.selected}">{{ record.title }}</span>
+            </div>
+          </button>
+        </div>
       </ng-template>
     </p-timeline>
   </div>

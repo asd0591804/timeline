@@ -265,6 +265,28 @@ button {
   letter-spacing: 0.18px;
   text-align: left;
   }
+// .button-time-selected::after{
+//   content: "";
+//   width: 0;
+//   height: 0;
+//   border-style: solid;
+//   border-width: 5px 10px 5px 0;
+//   border-color: transparent #cccccc transparent transparent;
+//   z-index: 99;
+// }
+
+.triangle::after{
+  content: "";
+  position: absolute;
+  left: 150px;
+  top: 5px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 8px 16px 8px 0;
+  border-color: transparent #cccccc transparent transparent;
+  z-index: 99;
+}
 
 .fontsize-selected{
   color: var(--surface-on-surface, #1C1D1C);
