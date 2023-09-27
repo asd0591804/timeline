@@ -7,10 +7,10 @@ export interface TimeRecord{
 }
 
 export interface DetailData{
+  selected: boolean;
   time: string;
   title: string;
   subtitle: string;
   detail: string;
-  class: object;
   id: string;
 }

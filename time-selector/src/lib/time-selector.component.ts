@@ -14,23 +14,33 @@ import { TimeSelectorService } from './time-selector.service';
 })
 export class TimeSelectorComponent implements OnInit {
 
-  @Input() record!: TimeRecord[];
+  /**
+   * 輸入給timeline使用的資料
+   * @type {TimeRecord[]}
+   * @memberof TimeSelectorComponent
+   */
+  @Input() value!: TimeRecord[];
 
-  @Output() output = new EventEmitter();
+  /**
+   * 輸出最終選擇的一筆資料
+   * @memberof TimeSelectorComponent
+   */
+  @Output() selected:EventEmitter<TimeRecord> = new EventEmitter<TimeRecord>();
 
-  timelineOutputList!: TimeRecord[];
+  timeList!: TimeRecord[];
 
   #timeSelectorService: TimeSelectorService = inject(TimeSelectorService);
+
   ngOnInit(){
-    this.timelineOutputList = this.#timeSelectorService.initList();
+    this.timeList = this.#timeSelectorService.initList();
   }
 
-  onUpdateRecord(record: TimeRecord[]){
-    this.timelineOutputList = record;
+  onChangeTimeline(record: TimeRecord[]){
+    this.timeList = record;
   }
 
-  onGetDetail(record: TimeRecord){
-    this.output.emit(record);
+  onChangeTimeList(record: TimeRecord){
+    this.selected.emit(record);
   }
 
 }

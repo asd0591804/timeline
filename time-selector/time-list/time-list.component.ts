@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, inject } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ListboxModule } from 'primeng/listbox';
 import { FormsModule } from '@angular/forms';
@@ -14,24 +14,31 @@ import { TimeListService } from './time-list.service';
 })
 export class TimeListComponent implements OnChanges{
 
-  @Input() list!: TimeRecord[];
+  /**
+   * 時間軸點選資料的subrecord，讓其可以顯示在列表上
+   * @type {TimeRecord[]}
+   * @memberof TimeListComponent
+   */
+  @Input() value!: TimeRecord[];
 
-  @Output() value = new EventEmitter();
+  /**
+   * 將在列表上點選的資料傳出
+   * @memberof TimeListComponent
+   */
+  @Output() choose:EventEmitter<TimeRecord> = new EventEmitter<TimeRecord>();
 
   selectedList!: TimeRecord;
   listDetail!: object[];
 
   #timeListService: TimeListService = inject(TimeListService);
 
-  ngOnChanges({list}: SimpleChanges): void {
-    if(!list || !(list.currentValue)) return;
-
-    this.listDetail = this.#timeListService.setInitial(this.list, this.listDetail);
+  ngOnChanges(): void {
+    this.listDetail = this.#timeListService.setInitial(this.value, this.listDetail);
   }
 
   onEmitFuntion(event: TimeRecord){
-    const result = this.#timeListService.dataTransform(event, this.list);
-    this.value.emit(result);
+    const result = this.#timeListService.getRecord(event, this.value);
+    this.choose.emit(result);
   }
 
 }

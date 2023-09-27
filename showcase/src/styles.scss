@@ -167,12 +167,19 @@ button {
   border-radius: 8px;
 }
 .dot-style{
+
   border: 0px solid #3C6353;
   border-radius: 50%;
   width: 1rem;
   height: 1rem;
 }
 
+.green-dot{
+  background-color:#3C6353
+}
+.orange-dot{
+  background-color: #C77516;
+}
 //timeline connet style，點和點之間連接的線，找到可以修改css的方法了
 .eachconnent{
   height: 75px;

@@ -16,10 +16,17 @@ import { TimelineService } from './timeline.service';
   styleUrls: ['./timeline.component.css']
 })
 export class TimelineComponent implements OnInit{
-  /**傳入的歷程資料 */
-  @Input() record!: TimeRecord[];
-  /**發送給 timelist 的值 */
-  @Output() list = new EventEmitter();
+  /**
+   * 傳入的歷程資料
+   * @type {TimeRecord[]}
+   * @memberof TimelineComponent
+   */
+  @Input() value!: TimeRecord[];
+  /**
+   * 發送給 timelist 的值
+   * @memberof TimelineComponent
+   */
+  @Output() choose: EventEmitter<TimeRecord[]> = new EventEmitter<TimeRecord[]>();
 
   yearsMenu!: MenuItem[];
   timelineRecord!: object[];
@@ -31,23 +38,29 @@ export class TimelineComponent implements OnInit{
   constructor(private el: ElementRef) {}
 
   ngOnInit(): void {
-    this.#timelineService.setInitRecord(this.record);
+    this.#timelineService.setInitRecord(this.value);
 
-    const sortTimes = this.#timelineService.sortTimeRecord(this.record);
-    const groupTimes = this.#timelineService.groupbyTimeRecord(sortTimes);
-    this.yearsMenu = this.#timelineService.getYearMonth(groupTimes);
+    const sortedTimes = this.#timelineService.sortTimeRecord(this.value);
+    const groupedTimes = this.#timelineService.groupbyTimeRecord(sortedTimes);
+    this.yearsMenu = this.#timelineService.getYearMonth(groupedTimes);
+
     this.timelineRecord = this.#timelineService.changeDataInTimeline();
   }
 
   onSelectTime(selectedTime: DetailData){
-    const filterRecord = this.#timelineService.onSelectTime(selectedTime);
-    if(filterRecord) this.list.emit(filterRecord.subrecord);
+    this.#timelineService.changeCss(selectedTime);
+
+    const filterRecord = this.#timelineService.findTarget(selectedTime);
+    if(filterRecord){
+      this.choose.emit(filterRecord.subrecord);
+    }
   }
 
-  onCheckMouseIn(){
+  onMouseOver(){
     this.#inTimeline = true;
   }
-  onCheckMouseOut(){
+
+  onMouseLeave(){
     this.#inTimeline = false;
   }
 

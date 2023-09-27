@@ -5,18 +5,18 @@
       <p-panelMenu [model]="yearsMenu" id="yearsPanel"></p-panelMenu>
   </div>
 
-  <div class="card scrollItem" id="scrollTable" (scroll)="onElementScroll()" (mouseover)="onCheckMouseIn()" (mouseleave)="onCheckMouseOut()">
+  <div class="card scrollItem" id="scrollTable" (scroll)="onElementScroll()" (mouseover)="onMouseOver()" (mouseleave)="onMouseLeave()">
     <p-timeline [value]="timelineRecord" id="timeline">
-      <ng-template pTemplate="marker" let-event>
-        <span class="custom-marker shadow-2" [style.backgroundColor]="event.class.dotColor" [class]="event.class.dotStyle"></span>
-        <span class="custom-connect" [class]="event.class.connectStyle"></span>
+      <ng-template pTemplate="marker" let-record>
+        <span class="custom-marker shadow-2 dot-style green-dot" [ngClass]="{'orange-dot':record.selected}"></span>
+        <span class="custom-connect eachconnent" [ngClass]="{'eachconnent-select':record.selected}"></span>
       </ng-template>
-      <ng-template pTemplate="content" let-event>
-        <button (click)="onSelectTime(event)" [class]="event.class.time">
+      <ng-template pTemplate="content" let-record>
+        <button (click)="onSelectTime(record)" class="button-time" [ngClass]="{'button-time-selected':record.selected}">
           <div style="line-height: 150%;">
-            {{ event.time }} <br>
-            <span [class]="event.class.title">{{ event.subtitle }}</span><br>
-            <span [class]="event.class.subtitle">{{ event.title }}</span>
+            {{ record.time }} <br>
+            <span class="fontsize" [ngClass]="{'fontsize-selected':record.selected}">{{ record.subtitle }}</span><br>
+            <span class="fontsize-caption" [ngClass]="{'fontsize-caption-selected':record.selected}">{{ record.title }}</span>
           </div>
         </button>
       </ng-template>

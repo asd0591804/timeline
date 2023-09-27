@@ -6,100 +6,137 @@ import { DetailData, TimeRecord } from 'time-selector/src/lib/timerecord';
   providedIn: 'root'
 })
 export class TimelineService {
-  diseaseRecord!: TimeRecord[];
-
-  #changeTypeRecord!: object[];
+  #record!: TimeRecord[];
   #previousSelect!: DetailData;
 
-  #cssClass!: object;
-  #selectCss!: object;
-
-  setInitRecord(diseaseRecord: TimeRecord[]){
-    this.diseaseRecord = diseaseRecord;
-    this.#cssClass = {dotColor: "#3C6353", dotStyle: "dot-style", connectStyle: "eachconnent", time: "button-time", titile: "fontsize", subtitle: "fontsize-caption"};
-    this.#selectCss = {dotColor: "#C77516", dotStyle:"dot-style", connectStyle:"eachconnent-select", time: "button-time-selected", titile: "fontsize-selected", subtitle:"fontsize-caption-selected"};
+  /**
+   * 初始化所需資料
+   * @param value
+   */
+  setInitRecord(value: TimeRecord[]){
+    this.#record = value;
   }
 
+  /**
+   * 排序資料
+   * @param records
+   * @returns
+   */
   sortTimeRecord(records: TimeRecord[]){
-    return records.sort((a, b) => a.date.getTime() - b.date.getTime());
+    return records.sort((x, y) => x.date.getTime() - y.date.getTime());
   }
 
+  /**
+   * 將資料分組
+   * @param records
+   * @returns
+   */
   groupbyTimeRecord(records: TimeRecord[]){
-    return records.groupBy(x=>[x.date.getFullYear()]);
+    return records.groupBy(x => [x.date.getFullYear()]);
   }
 
+  /**
+   * 取得左側年月列表可讀取 menuitem
+   * @param records
+   * @returns
+   */
   getYearMonth(records: Record<string | number | symbol, TimeRecord[]>){
-    let timeMenuItem: MenuItem[] = [];
-    Object.entries(records).forEach(([key, value]) => {
-      const yearMonthKey = JSON.parse(key);
-      const monthGroup = value.groupBy(x => x.date.getMonth());
-      let tmpMonth: object[] = [];
-
-      Object.entries(monthGroup).forEach(([key, value]) => {
-        const MonthKey = JSON.parse(key);
-        const tmp = {label: (MonthKey+1).toString().padStart(2, "0"), command: () => this.scrollToTarget(value[0].date)};
-        tmpMonth = [...tmpMonth, tmp];
-      });
-      timeMenuItem = timeMenuItem.concat({label: yearMonthKey, items: tmpMonth});
-    });
-    return timeMenuItem;
+    return Object.entries(records).map(([x, y]) => {
+      const yearMonthKey = JSON.parse(x);
+      const monthGroup = y.groupBy(z => z.date.getMonth());
+      const months: object[] = this.#getMenuItems(monthGroup);
+      return { label: yearMonthKey, items: months };
+    })
   }
 
-  scrollToTarget(nowTime: Date) {
-    const selectedIndex = this.diseaseRecord.findIndex(x=>x.date === nowTime);
-    const recordLength = this.diseaseRecord.length;
-    const scrollBody = document.getElementById('scrollTable');
-    const timeline = document.getElementById('timeline');
-    if (!timeline) return;
-
-    const percent = selectedIndex / recordLength;
-    const target = (percent) * (timeline.offsetHeight) -10;
-    scrollBody?.scrollTo(0, target);
-  }
-
+  /**
+   * 將資料轉成 時間軸讀取的格式
+   * @returns
+   */
   changeDataInTimeline(){
-    this.#changeTypeRecord = [];
-    this.diseaseRecord.forEach((a) => {
-      const monthDay = a.date.formatString('MM-DD');
-      const nowRecord = {time: monthDay, title: a.title, subtitle: a.subtitle, class: this.#cssClass, id: a.id};
-      this.#changeTypeRecord = [...this.#changeTypeRecord, nowRecord];
-    });
-    return this.#changeTypeRecord;
+    return this.#record.map(x => {
+      const monthDay = x.date.formatString('MM-DD');
+      const nowRecord = {time: monthDay, title: x.title, subtitle: x.subtitle, selected: false, id: x.id};
+      return nowRecord;
+    })
   }
 
-  onSelectTime(selectedTime: DetailData){
+  /**
+   * 切換點選的CSS
+   * @param selectedTime
+   */
+  changeCss(selectedTime: DetailData){
     if (this.#previousSelect){
-      this.#previousSelect.class = this.#cssClass;
+      this.#previousSelect.selected = false;
     }
-    selectedTime.class = this.#selectCss;
+    selectedTime.selected = true;
     this.#previousSelect = selectedTime;
-
-    return this.diseaseRecord.find(x => x.id === selectedTime.id);
   }
 
+  /**
+   * 找到點選的目標所指向的原始資料
+   * @param selectedTime
+   * @returns
+   */
+  findTarget(selectedTime: DetailData){
+    return this.#record.find(x => x.id === selectedTime.id)
+  }
+
+  /**
+   * 監聽畫面的滾動，使年份與時間軸達成一致
+   * @param el
+   * @param inTimeline
+   * @returns
+   */
   onElementScroll(el: ElementRef<any>, inTimeline: boolean){
     const scrollTable = el.nativeElement.querySelector('#scrollTable');
     const timeline = document.getElementById('timeline');
-    if(!timeline) return;
+    if(!timeline || !scrollTable) return;
 
-    //找到目前的高度比例，以及找出對應的目標在哪一年,前往目標。
     const percent = ((scrollTable.scrollTop)/timeline.offsetHeight);
-    const searchLabel = this.findTargetYears(percent);
-    this.openTimeMenu(searchLabel, inTimeline);
+    const searchLabel = this.#findTargetYears(percent);
+    this.#openTimeMenu(searchLabel, inTimeline);
   }
-  findTargetYears(percent: number){
-    //依比例去找出目標在哪一年
-    const targetIndex = Math.floor(percent*this.diseaseRecord.length);
-    const years = this.diseaseRecord[targetIndex+1].date.getFullYear();
-    //找到對應的menu選單label
-    const searchLabel = '[aria-label="'+years+'"]'
+
+  /**
+   * 點選時間後，跳到對應的時間軸
+   * @param nowTime
+   * @returns
+   */
+  #scrollToTarget(nowTime: Date) {
+    const selectedIndex = this.#record.findIndex(x => x.date === nowTime);
+    const recordLength = this.#record.length;
+    const scrollBody = document.getElementById('scrollTable');
+    const timeline = document.getElementById('timeline');
+    if (!timeline || !scrollBody) return;
+
+    const percent = selectedIndex / recordLength;
+    const target = percent * timeline.offsetHeight - 10;
+    scrollBody.scrollTo(0, target);
+  }
+
+  /**
+   * 依滾輪取得的目前高度去尋找對應的年份
+   * @param percent
+   * @returns
+   */
+  #findTargetYears(percent: number){
+    const targetIndex = Math.floor(percent * this.#record.length);
+    const years = this.#record[targetIndex + 1].date.getFullYear();
+    const searchLabel = `[aria-label="${years}"]`;
     return searchLabel;
   }
-  openTimeMenu(searchLabel: string ,inTimeline: boolean){
+
+  /**
+   * 打開對應的列表
+   * @param searchLabel
+   * @param inTimeline
+   * @returns
+   */
+  #openTimeMenu(searchLabel: string ,inTimeline: boolean){
     const yearsPanel = document.querySelector(searchLabel);
     if(!yearsPanel) return;
 
-    //確認選單是否有打開
     const ariaExpanded = yearsPanel.getAttribute('aria-expanded');
     const expandedState = ariaExpanded === "true";
     if(expandedState || !inTimeline) return;
@@ -110,5 +147,20 @@ export class TimelineService {
       view: window,
     });
     yearsPanel.dispatchEvent(clickEvent);
+  }
+
+  /**
+   * 獲得月份轉換成menuitem的形式
+   * @param monthGroup
+   * @returns
+   */
+  #getMenuItems(monthGroup: Record<string | number | symbol, TimeRecord[]>){
+    return Object.entries(monthGroup).map(([x, y]) => {
+      const MonthKey = JSON.parse(x);
+      return {
+        label: (MonthKey + 1).toString().padStart(2, "0"),
+        command: () => this.#scrollToTarget(y[0].date)
+      };
+    });
   }
 }
