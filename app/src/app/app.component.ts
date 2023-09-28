@@ -1,19 +1,19 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-import { TimeSelectorComponent } from 'time-selector/src/public-api';
-import { TimeRecord } from 'time-selector/src/lib/timerecord';
+import { TimelineComponent } from 'timeline/src/public-api';
+import { TimeRecord } from 'timeline/src/lib/timerecord';
 import { AppService } from './app.service';
 
 @Component({
   selector: 'his-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, TimeSelectorComponent],
+  imports: [CommonModule, RouterOutlet, TimelineComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit{
-  title = 'showcase';
+  title = 'app';
 
   record!: TimeRecord[];
   output!: TimeRecord;
@@ -22,7 +22,7 @@ export class AppComponent implements OnInit{
     this.record = this.#appService.setInitial();
   }
 
-  onUpdateOutput(event:TimeRecord){
+  onOutputUpdate(event:TimeRecord){
     this.output = event;
   }
 }

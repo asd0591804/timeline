@@ -1,10 +1,10 @@
 import { ElementRef, Injectable } from '@angular/core';
-import { DetailData, TimeRecord } from 'time-selector/src/lib/timerecord';
+import { DetailData, TimeRecord } from 'timeline/src/lib/timerecord';
 
 @Injectable({
   providedIn: 'root'
 })
-export class TimelineService {
+export class TimeMenuService {
   #record!: TimeRecord[];
   #previousSelect!: DetailData;
 

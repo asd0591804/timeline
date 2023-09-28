@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TimeListComponent } from './time-list.component';
+import { TimeMenuComponent } from './time-menu.component';
 
-describe('TimeListComponent', () => {
-  let component: TimeListComponent;
-  let fixture: ComponentFixture<TimeListComponent>;
+describe('TimeMenuComponent', () => {
+  let component: TimeMenuComponent;
+  let fixture: ComponentFixture<TimeMenuComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [TimeListComponent]
+      imports: [TimeMenuComponent]
     });
-    fixture = TestBed.createComponent(TimeListComponent);
+    fixture = TestBed.createComponent(TimeMenuComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,11 +1,11 @@
-import { TimeRecord } from 'time-selector/src/lib/timerecord';
+import { TimeRecord } from 'timeline/src/lib/timerecord';
 import { Injectable } from '@angular/core';
 import '@his-base/data-extension';
 
 @Injectable({
   providedIn: 'root'
 })
-export class TimeListService {
+export class TimeContentService {
 
   /** 初始化資料，更新後取新的值
    * @param list

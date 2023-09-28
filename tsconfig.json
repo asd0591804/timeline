@@ -20,8 +20,8 @@
     "module": "ES2022",
     "useDefineForClassFields": false,
     "paths": {
-      "time-selector": [
-        "dist/time-selector"
+      "timeline": [
+        "dist/timeline"
       ]
     },
     "lib": [

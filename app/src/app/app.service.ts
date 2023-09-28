@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { TimeRecord } from 'time-selector/src/lib/timerecord';
+import { TimeRecord } from 'timeline/src/lib/timerecord';
 
 @Injectable({
   providedIn: 'root'

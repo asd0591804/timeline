@@ -4,25 +4,25 @@ import { CommonModule } from '@angular/common';
 import { PanelMenuModule } from 'primeng/panelmenu';
 import { MenuItem } from 'primeng/api';
 import { TimelineModule } from 'primeng/timeline';
-import { DetailData, TimeRecord } from 'time-selector/src/lib/timerecord';
+import { DetailData, TimeRecord } from 'timeline/src/lib/timerecord';
 import '@his-base/array-extention';
-import { TimelineService } from './timeline.service';
+import { TimeMenuService } from './time-menu.service';
 
 @Component({
-  selector: 'his-timeline',
+  selector: 'his-time-menu',
   standalone: true,
   imports: [CommonModule,PanelMenuModule,TimelineModule],
-  templateUrl: './timeline.component.html',
-  styleUrls: ['./timeline.component.css']
+  templateUrl: './time-menu.component.html',
+  styleUrls: ['./time-menu.component.css']
 })
-export class TimelineComponent implements OnInit{
+export class TimeMenuComponent implements OnInit{
   /** 傳入的歷程資料
    * @type {TimeRecord[]}
-   * @memberof TimelineComponent
+   * @memberof TimeMenuComponent
    */
   @Input() value!: TimeRecord[];
-  /** 發送給 timelist 的值
-   * @memberof TimelineComponent
+  /** 發送給 time-content 的值
+   * @memberof TimeMenuComponent
    */
   @Output() choose: EventEmitter<TimeRecord[]> = new EventEmitter<TimeRecord[]>();
 
@@ -31,24 +31,24 @@ export class TimelineComponent implements OnInit{
 
   #inTimeline!: boolean;
 
-  #timelineService:TimelineService = inject(TimelineService);
+  #menuService:TimeMenuService = inject(TimeMenuService);
 
   constructor(private el: ElementRef) {}
 
   ngOnInit(): void {
-    this.#timelineService.setInitRecord(this.value);
+    this.#menuService.setInitRecord(this.value);
 
-    const sortedTimes = this.#timelineService.sortTimeRecord(this.value);
-    const groupedTimes = this.#timelineService.groupbyTimeRecord(sortedTimes);
-    this.yearsMenu = this.#timelineService.getYearMonth(groupedTimes);
+    const sortedTimes = this.#menuService.sortTimeRecord(this.value);
+    const groupedTimes = this.#menuService.groupbyTimeRecord(sortedTimes);
+    this.yearsMenu = this.#menuService.getYearMonth(groupedTimes);
 
-    this.timelineRecord = this.#timelineService.changeDataInTimeline();
+    this.timelineRecord = this.#menuService.changeDataInTimeline();
   }
 
   onSelectTime(selectedTime: DetailData){
-    this.#timelineService.changeCss(selectedTime);
+    this.#menuService.changeCss(selectedTime);
 
-    const filterRecord = this.#timelineService.findTarget(selectedTime);
+    const filterRecord = this.#menuService.findTarget(selectedTime);
     if(filterRecord){
       this.choose.emit(filterRecord.subrecord);
     }
@@ -63,6 +63,6 @@ export class TimelineComponent implements OnInit{
   }
 
   @HostListener('scroll', ['$event']) onElementScroll() {
-    this.#timelineService.onElementScroll(this.el, this.#inTimeline);
+    this.#menuService.onElementScroll(this.el, this.#inTimeline);
   }
 }

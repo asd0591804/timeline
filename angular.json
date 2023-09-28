@@ -3,23 +3,23 @@
   "version": 1,
   "newProjectRoot": "",
   "projects": {
-    "time-selector": {
+    "timeline": {
       "projectType": "library",
-      "root": "time-selector",
-      "sourceRoot": "time-selector/src",
+      "root": "timeline",
+      "sourceRoot": "timeline/src",
       "prefix": "his",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "project": "time-selector/ng-package.json"
+            "project": "timeline/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "time-selector/tsconfig.lib.prod.json"
+              "tsConfig": "timeline/tsconfig.lib.prod.json"
             },
             "development": {
-              "tsConfig": "time-selector/tsconfig.lib.json"
+              "tsConfig": "timeline/tsconfig.lib.json"
             }
           },
           "defaultConfiguration": "production"
@@ -27,7 +27,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "tsConfig": "time-selector/tsconfig.spec.json",
+            "tsConfig": "timeline/tsconfig.spec.json",
             "polyfills": [
               "zone.js",
               "zone.js/testing"
@@ -38,14 +38,14 @@
           "builder": "@angular-eslint/builder:lint",
           "options": {
             "lintFilePatterns": [
-              "time-selector/**/*.ts",
-              "time-selector/**/*.html"
+              "timeline/**/*.ts",
+              "timeline/**/*.html"
             ]
           }
         }
       }
     },
-    "showcase": {
+    "app": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -59,27 +59,27 @@
           "standalone": true
         }
       },
-      "root": "showcase",
-      "sourceRoot": "showcase/src",
+      "root": "app",
+      "sourceRoot": "app/src",
       "prefix": "his",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/showcase",
-            "index": "showcase/src/index.html",
-            "main": "showcase/src/main.ts",
+            "outputPath": "dist/app",
+            "index": "app/src/index.html",
+            "main": "app/src/main.ts",
             "polyfills": [
               "zone.js"
             ],
-            "tsConfig": "showcase/tsconfig.app.json",
+            "tsConfig": "app/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
-              "showcase/src/favicon.ico",
-              "showcase/src/assets"
+              "app/src/favicon.ico",
+              "app/src/assets"
             ],
             "styles": [
-              "showcase/src/styles.scss"
+              "app/src/styles.scss"
             ],
             "scripts": []
           },
@@ -114,10 +114,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "showcase:build:production"
+              "browserTarget": "app:build:production"
             },
             "development": {
-              "browserTarget": "showcase:build:development"
+              "browserTarget": "app:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -125,7 +125,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "showcase:build"
+            "browserTarget": "app:build"
           }
         },
         "test": {
@@ -135,14 +135,14 @@
               "zone.js",
               "zone.js/testing"
             ],
-            "tsConfig": "showcase/tsconfig.spec.json",
+            "tsConfig": "app/tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [
-              "showcase/src/favicon.ico",
-              "showcase/src/assets"
+              "app/src/favicon.ico",
+              "app/src/assets"
             ],
             "styles": [
-              "showcase/src/styles.scss"
+              "app/src/styles.scss"
             ],
             "scripts": []
           }
