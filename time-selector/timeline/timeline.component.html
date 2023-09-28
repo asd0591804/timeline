@@ -12,7 +12,7 @@
         <span class="custom-connect eachconnent" [ngClass]="{'eachconnent-select':record.selected}"></span>
       </ng-template>
       <ng-template pTemplate="content" let-record>
-        <div [ngClass]="{'triangle':record.selected}" style="display: flex;">
+        <div style="display: flex;">
           <button (click)="onSelectTime(record)" class="button-time" [ngClass]="{'button-time-selected':record.selected}">
             <div style="line-height: 150%;">
               {{ record.time }} <br>
@@ -20,6 +20,9 @@
               <span class="fontsize-caption" [ngClass]="{'fontsize-caption-selected':record.selected}">{{ record.title }}</span>
             </div>
           </button>
+          <svg *ngIf="record.selected" class="triangle-position"  width="25" height="25" viewBox="-50 -50 300 300" transform="rotate(270) scale(2)">
+            <polygon class="triangle-circle" stroke-linejoin="round" points="100,0 0,200 200,200"/>
+          </svg>
         </div>
       </ng-template>
     </p-timeline>

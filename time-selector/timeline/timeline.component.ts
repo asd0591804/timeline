@@ -16,14 +16,12 @@ import { TimelineService } from './timeline.service';
   styleUrls: ['./timeline.component.css']
 })
 export class TimelineComponent implements OnInit{
-  /**
-   * 傳入的歷程資料
+  /** 傳入的歷程資料
    * @type {TimeRecord[]}
    * @memberof TimelineComponent
    */
   @Input() value!: TimeRecord[];
-  /**
-   * 發送給 timelist 的值
+  /** 發送給 timelist 的值
    * @memberof TimelineComponent
    */
   @Output() choose: EventEmitter<TimeRecord[]> = new EventEmitter<TimeRecord[]>();

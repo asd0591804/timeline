@@ -14,15 +14,13 @@ import { TimeListService } from './time-list.service';
 })
 export class TimeListComponent implements OnChanges{
 
-  /**
-   * 時間軸點選資料的subrecord，讓其可以顯示在列表上
+  /** 時間軸點選資料的subrecord，讓其可以顯示在列表上
    * @type {TimeRecord[]}
    * @memberof TimeListComponent
    */
   @Input() value!: TimeRecord[];
 
-  /**
-   * 將在列表上點選的資料傳出
+  /** 將在列表上點選的資料傳出
    * @memberof TimeListComponent
    */
   @Output() choose:EventEmitter<TimeRecord> = new EventEmitter<TimeRecord>();
@@ -40,5 +38,7 @@ export class TimeListComponent implements OnChanges{
     const result = this.#timeListService.getRecord(event, this.value);
     this.choose.emit(result);
   }
+
+
 
 }

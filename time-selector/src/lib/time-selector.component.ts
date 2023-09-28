@@ -14,15 +14,13 @@ import { TimeSelectorService } from './time-selector.service';
 })
 export class TimeSelectorComponent implements OnInit {
 
-  /**
-   * 輸入給timeline使用的資料
+  /** 輸入給timeline使用的資料
    * @type {TimeRecord[]}
    * @memberof TimeSelectorComponent
    */
   @Input() value!: TimeRecord[];
 
-  /**
-   * 輸出最終選擇的一筆資料
+  /** 輸出最終選擇的一筆資料
    * @memberof TimeSelectorComponent
    */
   @Output() selected:EventEmitter<TimeRecord> = new EventEmitter<TimeRecord>();

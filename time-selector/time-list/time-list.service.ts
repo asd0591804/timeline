@@ -7,23 +7,26 @@ import '@his-base/data-extension';
 })
 export class TimeListService {
 
-  /**
-   * 初始化資料，更新後取新的值
+  /** 初始化資料，更新後取新的值
    * @param list
    * @param listDetail
    * @returns
    */
   setInitial(list: TimeRecord[], listDetail: object){
-    if(!listDetail) return [{title: "請點選資料"}];
+    let defaultIcon = 'summarize';
+    if(!listDetail) return [{title: "請點選資料", icon: defaultIcon, hide: true}];
 
     return list.map((x) => {
-      const newTitle = x.date.formatString(`MM-DD HH:mm ${x.title}`)
-      return {title: newTitle, id: x.id};
+      const time = x.date.formatString(`MM-DD HH:mm `);
+      if(x.icon){
+        defaultIcon = x.icon;
+        return {time: time, title: x.title, id: x.id, icon: defaultIcon, hide: false};
+      }
+      return {time: time, title: x.title, id: x.id, icon: defaultIcon, hide: true};
     })
   }
 
-  /**
-   * 找出目標的原始資料送出
+  /** 找出目標的原始資料送出
    * @param event
    * @param list
    * @returns

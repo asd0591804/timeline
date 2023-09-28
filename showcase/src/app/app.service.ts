@@ -18,8 +18,8 @@ export class AppService {
         {date: new Date(1999, 11, 18, 3, 24, 0), title: '醫師4', subtitle: '住院', id: '4-1'},
         {date: new Date(1999, 11, 19, 3, 24, 0), title: '醫師4', subtitle: '住院', id: '4-2'},
         {date: new Date(1999, 11, 20, 3, 24, 0), title: '醫師4', subtitle: '住院', id: '4-3'},
-        {date: new Date(1999, 11, 21, 3, 24, 0), title: '醫師4', subtitle: '住院', id: '4-4'},
-        {date: new Date(1999, 11, 22, 3, 24, 0), title: '醫師4', subtitle: '住院', id: '4-5'}
+        {date: new Date(1999, 11, 21, 3, 24, 0), title: '醫師4', subtitle: '住院', id: '4-4', icon: 'summarize'},
+        {date: new Date(1999, 11, 22, 3, 24, 0), title: '醫師4', subtitle: '住院', id: '4-5', icon: 'summarize'}
       ]},
       {date: new Date(2020, 5, 17, 3, 24, 0), title: '醫師5', subtitle: '急診', id: '5', subrecord: [{date: new Date(2020, 5, 17, 3, 24, 0), title: '醫師5', subtitle: '急診', id: '5'}]},
       {date: new Date(2020, 11, 17, 3, 24, 0), title: '醫師6', subtitle: '住院', id: '6', subrecord: [{date: new Date(2020, 11, 17, 3, 24, 0), title: '醫師6', subtitle: '住院', id: '6'}]},

@@ -1,5 +1,4 @@
 import { ElementRef, Injectable } from '@angular/core';
-import { MenuItem } from 'primeng/api';
 import { DetailData, TimeRecord } from 'time-selector/src/lib/timerecord';
 
 @Injectable({
@@ -9,16 +8,14 @@ export class TimelineService {
   #record!: TimeRecord[];
   #previousSelect!: DetailData;
 
-  /**
-   * 初始化所需資料
+  /** 初始化所需資料
    * @param value
    */
   setInitRecord(value: TimeRecord[]){
     this.#record = value;
   }
 
-  /**
-   * 排序資料
+  /** 排序資料
    * @param records
    * @returns
    */
@@ -26,8 +23,7 @@ export class TimelineService {
     return records.sort((x, y) => x.date.getTime() - y.date.getTime());
   }
 
-  /**
-   * 將資料分組
+  /** 將資料分組
    * @param records
    * @returns
    */
@@ -35,8 +31,7 @@ export class TimelineService {
     return records.groupBy(x => [x.date.getFullYear()]);
   }
 
-  /**
-   * 取得左側年月列表可讀取 menuitem
+  /** 取得左側年月列表可讀取 menuitem
    * @param records
    * @returns
    */
@@ -49,8 +44,7 @@ export class TimelineService {
     })
   }
 
-  /**
-   * 將資料轉成 時間軸讀取的格式
+  /** 將資料轉成 時間軸讀取的格式
    * @returns
    */
   changeDataInTimeline(){
@@ -61,8 +55,7 @@ export class TimelineService {
     })
   }
 
-  /**
-   * 切換點選的CSS
+  /** 切換點選的CSS
    * @param selectedTime
    */
   changeCss(selectedTime: DetailData){
@@ -73,8 +66,7 @@ export class TimelineService {
     this.#previousSelect = selectedTime;
   }
 
-  /**
-   * 找到點選的目標所指向的原始資料
+  /** 找到點選的目標所指向的原始資料
    * @param selectedTime
    * @returns
    */
@@ -82,8 +74,7 @@ export class TimelineService {
     return this.#record.find(x => x.id === selectedTime.id)
   }
 
-  /**
-   * 監聽畫面的滾動，使年份與時間軸達成一致
+  /** 監聽畫面的滾動，使年份與時間軸達成一致
    * @param el
    * @param inTimeline
    * @returns
@@ -98,8 +89,7 @@ export class TimelineService {
     this.#openTimeMenu(searchLabel, inTimeline);
   }
 
-  /**
-   * 點選時間後，跳到對應的時間軸
+  /** 點選時間後，跳到對應的時間軸
    * @param nowTime
    * @returns
    */
@@ -115,8 +105,7 @@ export class TimelineService {
     scrollBody.scrollTo(0, target);
   }
 
-  /**
-   * 依滾輪取得的目前高度去尋找對應的年份
+  /** 依滾輪取得的目前高度去尋找對應的年份
    * @param percent
    * @returns
    */
@@ -127,8 +116,7 @@ export class TimelineService {
     return searchLabel;
   }
 
-  /**
-   * 打開對應的列表
+  /** 打開對應的列表
    * @param searchLabel
    * @param inTimeline
    * @returns
@@ -149,8 +137,7 @@ export class TimelineService {
     yearsPanel.dispatchEvent(clickEvent);
   }
 
-  /**
-   * 獲得月份轉換成menuitem的形式
+  /** 獲得月份轉換成menuitem的形式
    * @param monthGroup
    * @returns
    */

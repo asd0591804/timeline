@@ -3,6 +3,7 @@ export interface TimeRecord{
   title: string;
   subtitle: string;
   id: string;
+  icon?: string;
   subrecord?: TimeRecord[];
 }
 
