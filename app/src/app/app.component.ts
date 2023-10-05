@@ -2,7 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { TimelineComponent } from 'timeline/src/public-api';
-import { TimeRecord } from 'timeline/src/lib/timerecord';
+import { TimeRecord } from 'timeline/src/lib/timeline.interface';
 import { AppService } from './app.service';
 
 @Component({
@@ -12,17 +12,18 @@ import { AppService } from './app.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   title = 'app';
 
   record!: TimeRecord[];
   output!: TimeRecord;
   #appService: AppService = inject(AppService);
-  ngOnInit(){
-    this.record = this.#appService.setInitial();
+
+  ngOnInit() {
+    this.record = this.#appService.initial();
   }
 
-  onOutputUpdate(event:TimeRecord){
+  onRecordSelected(event:TimeRecord) {
     this.output = event;
   }
 }

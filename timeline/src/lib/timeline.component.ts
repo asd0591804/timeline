@@ -1,9 +1,8 @@
-import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TimeMenuComponent } from "../../time-menu/time-menu.component";
-import { TimeContentComponent } from "../../time-content/time-content.component";
-import { TimeRecord } from './timerecord';
-import { TimelineService } from './timeline.service';
+import { TimeMenuComponent } from "./time-menu/time-menu.component";
+import { TimeContentComponent } from "./time-content/time-content.component";
+import { TimeRecord } from './timeline.interface';
 
 @Component({
     selector: 'his-timeline',
@@ -12,34 +11,28 @@ import { TimelineService } from './timeline.service';
     styles: [],
     imports: [CommonModule, TimeMenuComponent, TimeContentComponent]
 })
-export class TimelineComponent implements OnInit {
+export class TimelineComponent {
 
-  /** 輸入給timeline使用的資料
+  /** 輸入給 time-menu 使用的資料
    * @type {TimeRecord[]}
    * @memberof TimelineComponent
    */
   @Input() timeMenu!: TimeRecord[];
 
   /** 輸出最終選擇的一筆資料
+   * @type {EventEmitter<TimeRecord>}
    * @memberof TimelineComponent
-   * 換成 content 動詞 primeng data emit
    */
-  @Output() present:EventEmitter<TimeRecord> = new EventEmitter<TimeRecord>();
+  @Output() deliver: EventEmitter<TimeRecord> = new EventEmitter<TimeRecord>();
 
   timeContent!: TimeRecord[];
 
-  #timelineService: TimelineService = inject(TimelineService);
-
-  ngOnInit(){
-    this.timeContent = this.#timelineService.initList();
-  }
-
-  onMenuChange(record: TimeRecord[]){
+  onContentUpdate(record: TimeRecord[]) {
     this.timeContent = record;
   }
 
-  onContentChange(record: TimeRecord){
-    this.present.emit(record);
+  onRecordSelected(record: TimeRecord) {
+    this.deliver.emit(record);
   }
 
 }

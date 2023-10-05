@@ -1,0 +1,13 @@
+<div class="card flex justify-content-center scrollItem">
+  <p-listbox [options]="timeContent" [(ngModel)]="selectedContent" optionLabel="title" (onClick)="onContentSelect(selectedContent)" [style]="{'width':'15rem'}">
+    <ng-template let-timeContent pTemplate="item">
+      <div style="display: flex;">
+          <span id="iconlocate" class="material-symbols-outlined" [ngClass]="{'icon-tannsparent':timeContent.hide}">
+            {{timeContent.icon}}
+          </span>
+          <div class="timelist-time"> &nbsp;{{timeContent.time}} </div>
+          <div class="timelist-title"> &nbsp;&nbsp;{{timeContent.title}}</div>
+      </div>
+    </ng-template>
+  </p-listbox>
+</div>

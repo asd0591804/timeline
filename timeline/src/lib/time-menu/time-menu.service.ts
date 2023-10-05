@@ -1,25 +1,17 @@
 import { ElementRef, Injectable } from '@angular/core';
-import { DetailData, TimeRecord } from 'timeline/src/lib/timerecord';
+import { TimelineSubject, TimeRecord } from 'timeline/src/lib/timeline.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TimeMenuService {
-  #record!: TimeRecord[];
-  #previousSelect!: DetailData;
-
-  /** 初始化所需資料
-   * @param value
-   */
-  setInitRecord(value: TimeRecord[]){
-    this.#record = value;
-  }
+  #previousSelect!: TimelineSubject;
 
   /** 排序資料
    * @param records
    * @returns
    */
-  sortTimeRecord(records: TimeRecord[]){
+  sortTimeRecord(records: TimeRecord[]) {
     return records.sort((x, y) => x.date.getTime() - y.date.getTime());
   }
 
@@ -27,7 +19,7 @@ export class TimeMenuService {
    * @param records
    * @returns
    */
-  groupbyTimeRecord(records: TimeRecord[]){
+  groupbyTimeRecord(records: TimeRecord[]) {
     return records.groupBy(x => [x.date.getFullYear()]);
   }
 
@@ -35,11 +27,11 @@ export class TimeMenuService {
    * @param records
    * @returns
    */
-  getYearMonth(records: Record<string | number | symbol, TimeRecord[]>){
+  getMenu(value: TimeRecord[], records: Record<string | number | symbol, TimeRecord[]>) {
     return Object.entries(records).map(([x, y]) => {
       const yearMonthKey = JSON.parse(x);
       const monthGroup = y.groupBy(z => z.date.getMonth());
-      const months: object[] = this.#getMenuItems(monthGroup);
+      const months: object[] = this.#getMenuItems(value, monthGroup);
       return { label: yearMonthKey, items: months };
     })
   }
@@ -47,8 +39,8 @@ export class TimeMenuService {
   /** 將資料轉成 時間軸讀取的格式
    * @returns
    */
-  changeDataInTimeline(){
-    return this.#record.map(x => {
+  getTimelineRecord(record: TimeRecord[]) {
+    return record.map(x => {
       const monthDay = x.date.formatString('MM-DD');
       const nowRecord = {time: monthDay, title: x.title, subtitle: x.subtitle, selected: false, id: x.id};
       return nowRecord;
@@ -58,11 +50,11 @@ export class TimeMenuService {
   /** 切換點選的CSS
    * @param selectedTime
    */
-  changeCss(selectedTime: DetailData){
-    if (this.#previousSelect){
-      this.#previousSelect.selected = false;
+  changeCss(selectedTime: TimelineSubject) {
+    if (this.#previousSelect) {
+      this.#previousSelect.isSelected = false;
     }
-    selectedTime.selected = true;
+    selectedTime.isSelected = true;
     this.#previousSelect = selectedTime;
   }
 
@@ -70,36 +62,36 @@ export class TimeMenuService {
    * @param selectedTime
    * @returns
    */
-  findTarget(selectedTime: DetailData){
-    return this.#record.find(x => x.id === selectedTime.id)
+  findRecord(record: TimeRecord[], selectedTime: TimelineSubject) {
+    return record.find(x => x.id === selectedTime.id)
   }
 
   /** 監聽畫面的滾動，使年份與時間軸達成一致
    * @param el
-   * @param inTimeline
+   * @param isInTimeline
    * @returns
    */
-  onElementScroll(el: ElementRef<any>, inTimeline: boolean){
+  onElementScroll(el: ElementRef<any>, record: TimeRecord[], isInTimeline: boolean) {
     const scrollTable = el.nativeElement.querySelector('#scrollTable');
     const timeline = document.getElementById('timeline');
     if(!timeline || !scrollTable) return;
 
-    const percent = ((scrollTable.scrollTop)/timeline.offsetHeight);
-    const searchLabel = this.#findTargetYears(percent);
-    this.#openTimeMenu(searchLabel, inTimeline);
+    const percent = (scrollTable.scrollTop / timeline.offsetHeight);
+    const searchLabel = this.#getYears(record, percent);
+    this.#openTimeMenu(searchLabel, isInTimeline);
   }
 
   /** 點選時間後，跳到對應的時間軸
    * @param nowTime
    * @returns
    */
-  #scrollToTarget(nowTime: Date) {
-    const selectedIndex = this.#record.findIndex(x => x.date === nowTime);
-    const recordLength = this.#record.length;
+  #scrollToTarget(record: TimeRecord[], nowTime: Date) {
     const scrollBody = document.getElementById('scrollTable');
     const timeline = document.getElementById('timeline');
     if (!timeline || !scrollBody) return;
 
+    const selectedIndex = record.findIndex(x => x.date === nowTime);
+    const recordLength = record.length;
     const percent = selectedIndex / recordLength;
     const target = percent * timeline.offsetHeight - 10;
     scrollBody.scrollTo(0, target);
@@ -109,25 +101,25 @@ export class TimeMenuService {
    * @param percent
    * @returns
    */
-  #findTargetYears(percent: number){
-    const targetIndex = Math.floor(percent * this.#record.length);
-    const years = this.#record[targetIndex + 1].date.getFullYear();
-    const searchLabel = `[aria-label="${years}"]`;
+  #getYears(record: TimeRecord[], percent: number) {
+    const targetIndex = Math.floor(percent * record.length);
+    const years = record[targetIndex + 1].date.getFullYear();
+    const searchLabel = `[aria-label="${ years }"]`;
     return searchLabel;
   }
 
   /** 打開對應的列表
    * @param searchLabel
-   * @param inTimeline
+   * @param isInTimeline
    * @returns
    */
-  #openTimeMenu(searchLabel: string ,inTimeline: boolean){
+  #openTimeMenu(searchLabel: string ,isInTimeline: boolean) {
     const yearsPanel = document.querySelector(searchLabel);
     if(!yearsPanel) return;
 
     const ariaExpanded = yearsPanel.getAttribute('aria-expanded');
     const expandedState = ariaExpanded === "true";
-    if(expandedState || !inTimeline) return;
+    if(expandedState || !isInTimeline) return;
 
     const clickEvent = new MouseEvent('click', {
       bubbles: true,
@@ -141,12 +133,12 @@ export class TimeMenuService {
    * @param monthGroup
    * @returns
    */
-  #getMenuItems(monthGroup: Record<string | number | symbol, TimeRecord[]>){
+  #getMenuItems(record: TimeRecord[], monthGroup: Record<string | number | symbol, TimeRecord[]>) {
     return Object.entries(monthGroup).map(([x, y]) => {
       const MonthKey = JSON.parse(x);
       return {
         label: (MonthKey + 1).toString().padStart(2, "0"),
-        command: () => this.#scrollToTarget(y[0].date)
+        command: () => this.#scrollToTarget(record, y[0].date)
       };
     });
   }

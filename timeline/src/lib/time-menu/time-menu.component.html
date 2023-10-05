@@ -2,7 +2,7 @@
 
 <div class='forFlex timeline-width'>
   <div class="card flex justify-content-center scrollItem">
-      <p-panelMenu [model]="yearsMenu" id="yearsPanel"></p-panelMenu>
+      <p-panelMenu [model]="yearMonthMenu" id="yearsPanel"></p-panelMenu>
   </div>
 
   <div class="card scrollItem" id="scrollTable" (scroll)="onElementScroll()" (mouseover)="onMouseOver()" (mouseleave)="onMouseLeave()">
@@ -13,7 +13,7 @@
       </ng-template>
       <ng-template pTemplate="content" let-record>
         <div style="display: flex;">
-          <button (click)="onSelectTime(record)" class="button-time" [ngClass]="{'button-time-selected':record.selected}">
+          <button (click)="onTimelineSelect(record)" class="button-time" [ngClass]="{'button-time-selected':record.selected}">
             <div style="line-height: 150%;">
               {{ record.time }} <br>
               <span class="fontsize" [ngClass]="{'fontsize-selected':record.selected}">{{ record.subtitle }}</span><br>
