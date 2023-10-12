@@ -7,30 +7,17 @@ import '@his-base/data-extension';
 })
 export class TimeContentService {
 
-  /** 初始化資料，更新後取新的值
-   * @param records
-   * @param timeContents
-   * @returns
-   */
-  getTimeContent(records: TimeRecord[], timeContents: TimeContent[]) {
-    if (!timeContents) {
-      return [{recordId: '', time: '', title: '請點選資料', icon: 'summarize', hide: true}];
-    }
+  /** 初始化資料，更新後取新的值 */
+  getTimeContents(records: TimeRecord[]) {
+    if (!records) return [];
 
     return records.map(x => {
       const time = x.date.formatString('MM-DD HH:mm ');
-      if (x.icon) {
-        return {recordId: x.id, time: time, title: x.title, icon: x.icon, hide: false};
-      }
-      return {recordId: x.id, time: time, title: x.title, icon: 'summarize', hide: true};
+      return {...x, recordId: x.id, time};
     })
   }
 
-  /** 找出目標的原始資料送出
-   * @param records
-   * @param timeContent
-   * @returns
-   */
+  /** 找出目標的原始資料送出 */
   getSelectedRecord(records: TimeRecord[], timeContent: TimeContent) {
     return records.find(x => x.id === timeContent.recordId)
   }

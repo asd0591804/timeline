@@ -1,4 +1,6 @@
-<div class="forFlex">
-  <his-time-menu [value]="value" (update)="onContentUpdate($event)"></his-time-menu>
-  <his-time-content [value]="timeContent" (selected)="onRecordSelected($event)"></his-time-content>
+<div class="timelineLayout">
+  <his-time-menu [value]="value" (selected)="onMenuSelect($event)"></his-time-menu>
+  <his-time-content [value]="timeContents" (selected)="onContentSelect($event)"></his-time-content>
 </div>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />

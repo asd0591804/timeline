@@ -1,12 +1,12 @@
 <!-- eslint-disable @angular-eslint/template/mouse-events-have-key-events -->
 
-<div class="forFlex timeline-width">
+<div class="timeMenuLayout">
   <div class="card flex justify-content-center scrollItem">
       <p-panelMenu [model]="yearMonthMenu" id="yearsPanel"></p-panelMenu>
   </div>
 
   <div class="card scrollItem" id="scrollTable" (scroll)="onTimelineScroll()" (mouseover)="onMouseOver()" (mouseleave)="onMouseLeave()">
-    <p-timeline [value]="timelineRecord" id="timeline">
+    <p-timeline [value]="timelineSubject" id="timeline">
       <ng-template pTemplate="marker" let-record>
         <span class="custom-marker shadow-2 dot-style green-dot" [ngClass]="{'orange-dot': record.isSelected}"></span>
         <span class="custom-connect eachconnent" [ngClass]="{'eachconnent-select': record.isSelected}"></span>

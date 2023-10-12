@@ -83,10 +83,6 @@ button {
   display:none;
 }
 
-// .p-timeline .p-timeline-event-marker{
-//   background-color: blue;
-// }
-
 .p-panelmenu{
   width: 60px;
 }
@@ -242,20 +238,6 @@ button {
   background-color: #ECEDED;
 }
 
-// .timeline-width{
-  // width: 300px;
-// }
-
-// .p-toggleable-content {
-//   background-color: #FDD3A4;
-// }
-// .p-panelmenu .p-panelmenu-content .p-menuitem:not(.p-highlight):not(.p-disabled) > .p-menuitem-content:hover {
-//   background-color: #FDD3A4;
-// }
-// .p-panelmenu .p-panelmenu-header:not(.p-disabled).p-highlight .p-panelmenu-header-content{
-//   border-radius: 8px;
-// }
-
 
 .button-time{
   overflow: hidden;
@@ -302,15 +284,6 @@ button {
   letter-spacing: 0.18px;
   text-align: left;
   }
-// .button-time-selected::after{
-//   content: "";
-//   width: 0;
-//   height: 0;
-//   border-style: solid;
-//   border-width: 5px 10px 5px 0;
-//   border-color: transparent #cccccc transparent transparent;
-//   z-index: 99;
-// }
 
 .triangle::after{
   content: "";

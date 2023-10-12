@@ -8,31 +8,25 @@ import { TimeRecord } from './timeline.interface';
     selector: 'his-timeline',
     standalone: true,
     templateUrl: './timeline.component.html',
-    styles: [],
+    styleUrls: ['./timeline.component.scss'],
     imports: [CommonModule, TimeMenuComponent, TimeContentComponent]
 })
 export class TimelineComponent {
 
-  /** 輸入給 time-menu 使用的資料
-   * @type {TimeRecord[]}
-   * @memberof TimelineComponent
-   */
+  /** 輸入給 time-menu 使用的資料 */
   @Input() value!: TimeRecord[];
 
-  /** 輸出最終選擇的一筆資料
-   * @type {EventEmitter<TimeRecord>}
-   * @memberof TimelineComponent
-   */
-  @Output() selectedClick: EventEmitter<TimeRecord> = new EventEmitter<TimeRecord>();
+  /** 輸出最終選擇的一筆資料 */
+  @Output() selected: EventEmitter<TimeRecord> = new EventEmitter<TimeRecord>();
 
-  timeContent!: TimeRecord[];
+  timeContents!: TimeRecord[];
 
-  onContentUpdate(record: TimeRecord[]) {
-    this.timeContent = record;
+  onMenuSelect(subRecords: TimeRecord[]) {
+    this.timeContents = subRecords;
   }
 
-  onRecordSelected(record: TimeRecord) {
-    this.selectedClick.emit(record);
+  onContentSelect(selectedRecord: TimeRecord) {
+    this.selected.emit(selectedRecord);
   }
 
 }

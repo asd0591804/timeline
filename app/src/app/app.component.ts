@@ -10,7 +10,7 @@ import { AppService } from './app.service';
   standalone: true,
   imports: [CommonModule, RouterOutlet, TimelineComponent],
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: [],
 })
 export class AppComponent implements OnInit {
   title = 'app';
@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
     this.records = this.#appService.initial();
   }
 
-  onRecordSelected(record:TimeRecord) {
+  onRecordSelect(record: TimeRecord) {
     this.output = record;
   }
 }
