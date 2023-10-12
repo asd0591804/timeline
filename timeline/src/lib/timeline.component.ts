@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { TimeMenuComponent } from "./time-menu/time-menu.component";
 import { TimeContentComponent } from "./time-content/time-content.component";
 import { TimeRecord } from './timeline.interface';
@@ -9,7 +8,7 @@ import { TimeRecord } from './timeline.interface';
     standalone: true,
     templateUrl: './timeline.component.html',
     styleUrls: ['./timeline.component.scss'],
-    imports: [CommonModule, TimeMenuComponent, TimeContentComponent]
+    imports: [TimeMenuComponent, TimeContentComponent]
 })
 export class TimelineComponent {
 
