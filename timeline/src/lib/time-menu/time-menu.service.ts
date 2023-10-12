@@ -38,7 +38,7 @@ export class TimeMenuService {
   }
 
   /** 監聽畫面的滾動，使年份與時間軸達成一致 */
-  scrollTimeline(el: ElementRef<any>, records: TimeRecord[], isMouseScrolling: boolean) {
+  scrollTimeline(el: ElementRef, records: TimeRecord[], isMouseScrolling: boolean) {
     const scrollTable = el.nativeElement.querySelector('#scrollTable');
     const timeline = document.getElementById('timeline');
     if (!timeline || !scrollTable || timeline.offsetHeight === 0) return;

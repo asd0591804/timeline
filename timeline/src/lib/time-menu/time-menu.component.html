@@ -13,7 +13,7 @@
       </ng-template>
       <ng-template pTemplate="content" let-record>
         <div style="display: flex;">
-          <button (click)="onTimelineSelect(record)" class="button-time" [ngClass]="{'button-time-selected': record.isSelected}">
+          <button (click)="onTimelineClick(record)" class="button-time" [ngClass]="{'button-time-selected': record.isSelected}">
             <div style="line-height: 150%;">
               {{ record.time }} <br>
               <span class="fontsize" [ngClass]="{'fontsize-selected': record.isSelected}">{{ record.subtitle }}</span><br>

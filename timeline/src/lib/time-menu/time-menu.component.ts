@@ -38,7 +38,7 @@ export class TimeMenuComponent implements OnInit {
     this.timelineSubject = this.#timeMenuService.getTimelineSubject(this.value);
   }
 
-  onTimelineSelect(selectedTime: TimelineSubject) {
+  onTimelineClick(selectedTime: TimelineSubject) {
     this.#timeMenuService.switchSelectedCss(selectedTime);
 
     const selectedRecord = this.#timeMenuService.getSelectedRecord(this.value, selectedTime);

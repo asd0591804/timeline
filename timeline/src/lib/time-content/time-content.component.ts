@@ -29,7 +29,7 @@ export class TimeContentComponent implements OnChanges {
     this.timeContents = this.#timeContentService.getTimeContents(this.value);
   }
 
-  onContentSelect(timeContent: TimeContent) {
+  onContentClick(timeContent: TimeContent) {
     const result = this.#timeContentService.getSelectedRecord(this.value, timeContent);
     this.selected.emit(result);
   }

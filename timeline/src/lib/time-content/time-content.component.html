@@ -1,5 +1,5 @@
 <div class="card flex justify-content-center scrollItem">
-  <p-listbox [options]="timeContents" [(ngModel)]="selectedContent" optionLabel="title" (onClick)="onContentSelect(selectedContent)" [emptyMessage]="' '">
+  <p-listbox [options]="timeContents" [(ngModel)]="selectedContent" optionLabel="title" (onClick)="onContentClick(selectedContent)" [emptyMessage]="' '">
     <ng-template let-timeContent pTemplate="item" >
       <div class="content-flex">
           <span id="iconlocate" class="material-symbols-outlined icon-frame">
