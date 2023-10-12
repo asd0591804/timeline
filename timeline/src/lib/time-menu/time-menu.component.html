@@ -1,26 +1,26 @@
 <!-- eslint-disable @angular-eslint/template/mouse-events-have-key-events -->
 
-<div class='forFlex timeline-width'>
+<div class="forFlex timeline-width">
   <div class="card flex justify-content-center scrollItem">
       <p-panelMenu [model]="yearMonthMenu" id="yearsPanel"></p-panelMenu>
   </div>
 
-  <div class="card scrollItem" id="scrollTable" (scroll)="onElementScroll()" (mouseover)="onMouseOver()" (mouseleave)="onMouseLeave()">
+  <div class="card scrollItem" id="scrollTable" (scroll)="onTimelineScroll()" (mouseover)="onMouseOver()" (mouseleave)="onMouseLeave()">
     <p-timeline [value]="timelineRecord" id="timeline">
       <ng-template pTemplate="marker" let-record>
-        <span class="custom-marker shadow-2 dot-style green-dot" [ngClass]="{'orange-dot':record.selected}"></span>
-        <span class="custom-connect eachconnent" [ngClass]="{'eachconnent-select':record.selected}"></span>
+        <span class="custom-marker shadow-2 dot-style green-dot" [ngClass]="{'orange-dot': record.isSelected}"></span>
+        <span class="custom-connect eachconnent" [ngClass]="{'eachconnent-select': record.isSelected}"></span>
       </ng-template>
       <ng-template pTemplate="content" let-record>
         <div style="display: flex;">
-          <button (click)="onTimelineSelect(record)" class="button-time" [ngClass]="{'button-time-selected':record.selected}">
+          <button (click)="onTimelineSelect(record)" class="button-time" [ngClass]="{'button-time-selected': record.isSelected}">
             <div style="line-height: 150%;">
               {{ record.time }} <br>
-              <span class="fontsize" [ngClass]="{'fontsize-selected':record.selected}">{{ record.subtitle }}</span><br>
-              <span class="fontsize-caption" [ngClass]="{'fontsize-caption-selected':record.selected}">{{ record.title }}</span>
+              <span class="fontsize" [ngClass]="{'fontsize-selected': record.isSelected}">{{ record.subtitle }}</span><br>
+              <span class="fontsize-caption" [ngClass]="{'fontsize-caption-selected': record.isSelected}">{{ record.title }}</span>
             </div>
           </button>
-          <svg *ngIf="record.selected" class="triangle-position"  width="25" height="25" viewBox="-50 -50 300 300" transform="rotate(270) scale(2)">
+          <svg *ngIf="record.isSelected" class="triangle-position"  width="25" height="25" viewBox="-50 -50 300 300" transform="rotate(270) scale(2)">
             <polygon class="triangle-circle" stroke-linejoin="round" points="100,0 0,200 200,200"/>
           </svg>
         </div>

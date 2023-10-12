@@ -8,17 +8,17 @@ import '@his-base/data-extension';
 export class TimeContentService {
 
   /** 初始化資料，更新後取新的值
-   * @param record
-   * @param timeContent
+   * @param records
+   * @param timeContents
    * @returns
    */
-  getTimeContent(record: TimeRecord[], timeContent: TimeContent[]) {
-    if (!timeContent) {
-      return [{recordId: '', time: '', title: "請點選資料", icon: 'summarize', hide: true}];
+  getTimeContent(records: TimeRecord[], timeContents: TimeContent[]) {
+    if (!timeContents) {
+      return [{recordId: '', time: '', title: '請點選資料', icon: 'summarize', hide: true}];
     }
 
-    return record.map(x => {
-      const time = x.date.formatString(`MM-DD HH:mm `);
+    return records.map(x => {
+      const time = x.date.formatString('MM-DD HH:mm ');
       if (x.icon) {
         return {recordId: x.id, time: time, title: x.title, icon: x.icon, hide: false};
       }
@@ -27,11 +27,11 @@ export class TimeContentService {
   }
 
   /** 找出目標的原始資料送出
-   * @param event
-   * @param record
+   * @param records
+   * @param timeContent
    * @returns
    */
-  getRecord(record: TimeRecord[], timeContent: TimeContent) {
-    return record.find(x => x.id === timeContent.recordId)
+  getSelectedRecord(records: TimeRecord[], timeContent: TimeContent) {
+    return records.find(x => x.id === timeContent.recordId)
   }
 }

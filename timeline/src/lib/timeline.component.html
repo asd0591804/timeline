@@ -1,6 +1,4 @@
-<div class="outside">
-  <div class="forFlex">
-    <his-time-menu [value]="timeMenu" (update)="onContentUpdate($event)"></his-time-menu>
-    <his-time-content [value]="timeContent" (selected)="onRecordSelected($event)"></his-time-content>
-  </div>
+<div class="forFlex">
+  <his-time-menu [value]="value" (update)="onContentUpdate($event)"></his-time-menu>
+  <his-time-content [value]="timeContent" (selected)="onRecordSelected($event)"></his-time-content>
 </div>

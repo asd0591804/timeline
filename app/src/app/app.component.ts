@@ -15,15 +15,15 @@ import { AppService } from './app.service';
 export class AppComponent implements OnInit {
   title = 'app';
 
-  record!: TimeRecord[];
+  records!: TimeRecord[];
   output!: TimeRecord;
   #appService: AppService = inject(AppService);
 
   ngOnInit() {
-    this.record = this.#appService.initial();
+    this.records = this.#appService.initial();
   }
 
-  onRecordSelected(event:TimeRecord) {
-    this.output = event;
+  onRecordSelected(record:TimeRecord) {
+    this.output = record;
   }
 }

@@ -377,3 +377,8 @@ button {
   color: transparent; /* 設置 icon 顏色為透明 */
   font-size: 24px;
 }
+
+// panelmenu-content 在點選時會有莫名的閃爍，把顏色先拿掉
+.p-panelmenu .p-panelmenu-content .p-menuitem:not(.p-highlight):not(.p-disabled).p-focus > .p-menuitem-content {
+  background-color: transparent;
+}

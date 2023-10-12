@@ -10,7 +10,6 @@ import { TimeContentService } from './time-content.service';
   standalone: true,
   imports: [CommonModule,ListboxModule,FormsModule],
   templateUrl: './time-content.component.html',
-  styleUrls: ['./time-content.component.css']
 })
 export class TimeContentComponent implements OnChanges {
 
@@ -27,16 +26,16 @@ export class TimeContentComponent implements OnChanges {
   @Output() selected: EventEmitter<TimeRecord> = new EventEmitter<TimeRecord>();
 
   selectedContent!: TimeContent;
-  timeContent!: TimeContent[];
+  timeContents!: TimeContent[];
 
   #timeContentService: TimeContentService = inject(TimeContentService);
 
   ngOnChanges(): void {
-    this.timeContent = this.#timeContentService.getTimeContent(this.value, this.timeContent);
+    this.timeContents = this.#timeContentService.getTimeContent(this.value, this.timeContents);
   }
 
   onContentSelect(timeContent: TimeContent) {
-    const result = this.#timeContentService.getRecord(this.value, timeContent);
+    const result = this.#timeContentService.getSelectedRecord(this.value, timeContent);
     this.selected.emit(result);
   }
 }

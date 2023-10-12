@@ -2,26 +2,25 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.7.
 
-## Development server
+## Timeline 畫面
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+![](./app/src/assets/timeline.gif)
 
-## Code scaffolding
+## Timeline 使用說明
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- 使用需要在外層限制高度， 如 `app.component.html` 的 `class="outside"`，使用 `height: 98vh`去限制
+- 會分析傳入的資料之時間，將年月顯示在左側為選單。
+- 將每筆資料在對應的時間軸中顯示。
+- 點選時間軸項目會顯示更詳細的資訊在其右側列表。
+- 須在使用時，設定一 `input`， `input` 為 所有的病史資料傳入，型別為 `TimeRecord[]`。
+- 須在使用時，設定一 `output`， `output` 是在選擇其中一筆資料時會將對應資料傳出，型別為 `TimeRecord`。
 
-## Build
+## Timeline 資料結構
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+傳入的病史紀錄須符合 `interface TimeRecord[]`
+- `id`: 辨識用唯一值
+- `date`: 時間紀錄
+- `title`: 醫師名稱
+- `subtitle`: 就診類別，ex.門診，急診，住院
+- `icon?`: 供住院類別使用，如有每週總結，可選擇icon樣式
+- `subRecord?`: 供住院類別使用，包含第一天住院可用資訊

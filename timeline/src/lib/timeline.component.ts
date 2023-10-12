@@ -17,13 +17,13 @@ export class TimelineComponent {
    * @type {TimeRecord[]}
    * @memberof TimelineComponent
    */
-  @Input() timeMenu!: TimeRecord[];
+  @Input() value!: TimeRecord[];
 
   /** 輸出最終選擇的一筆資料
    * @type {EventEmitter<TimeRecord>}
    * @memberof TimelineComponent
    */
-  @Output() deliver: EventEmitter<TimeRecord> = new EventEmitter<TimeRecord>();
+  @Output() selectedClick: EventEmitter<TimeRecord> = new EventEmitter<TimeRecord>();
 
   timeContent!: TimeRecord[];
 
@@ -32,7 +32,7 @@ export class TimelineComponent {
   }
 
   onRecordSelected(record: TimeRecord) {
-    this.deliver.emit(record);
+    this.selectedClick.emit(record);
   }
 
 }

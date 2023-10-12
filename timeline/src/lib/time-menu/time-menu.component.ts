@@ -13,7 +13,6 @@ import { TimeMenuService } from './time-menu.service';
   standalone: true,
   imports: [CommonModule,PanelMenuModule,TimelineModule],
   templateUrl: './time-menu.component.html',
-  styleUrls: ['./time-menu.component.css']
 })
 export class TimeMenuComponent implements OnInit {
   /** 傳入的資料
@@ -29,7 +28,7 @@ export class TimeMenuComponent implements OnInit {
   @Output() update: EventEmitter<TimeRecord[]> = new EventEmitter<TimeRecord[]>();
 
   yearMonthMenu!: MenuItem[];
-  timelineRecord!: object[];
+  timelineRecord!: TimelineSubject[];
 
   #isMouseScrolling!: boolean;
 
@@ -38,10 +37,7 @@ export class TimeMenuComponent implements OnInit {
   constructor(private el: ElementRef) {}
 
   ngOnInit(): void {
-
-    const sortedValue = this.#timeMenuService.sortTimeRecord(this.value);
-    const groupedValue = this.#timeMenuService.groupbyTimeRecord(sortedValue);
-    this.yearMonthMenu = this.#timeMenuService.getMenu(this.value, groupedValue);
+    this.yearMonthMenu = this.#timeMenuService.getTimeMenu(this.value);
 
     this.timelineRecord = this.#timeMenuService.getTimelineRecord(this.value);
   }
@@ -49,9 +45,9 @@ export class TimeMenuComponent implements OnInit {
   onTimelineSelect(selectedTime: TimelineSubject) {
     this.#timeMenuService.changeCss(selectedTime);
 
-    const foundRecord = this.#timeMenuService.findRecord(this.value, selectedTime);
-    if (foundRecord) {
-      this.update.emit(foundRecord.subRecord);
+    const selectedRecord = this.#timeMenuService.getSelectedRecord(this.value, selectedTime);
+    if (selectedRecord) {
+      this.update.emit(selectedRecord.subRecord);
     }
   }
 
@@ -63,7 +59,8 @@ export class TimeMenuComponent implements OnInit {
     this.#isMouseScrolling = false;
   }
 
-  @HostListener('scroll', ['$event']) onElementScroll() {
-    this.#timeMenuService.onElementScroll(this.el, this.value, this.#isMouseScrolling);
+  @HostListener('scroll', ['$event'])
+  onTimelineScroll() {
+    this.#timeMenuService.scrollTimeline(this.el, this.value, this.#isMouseScrolling);
   }
 }

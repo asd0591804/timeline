@@ -1,5 +1,5 @@
-<div style="background-color: #ECEDED ;padding: 10px;">
-  <his-timeline [timeMenu]="record" (deliver)="onRecordSelected($event)"></his-timeline>
+<div style="background-color: #ECEDED ;padding: 10px;" class="outside">
+  <his-timeline [value]="records" (selectedClick)="onRecordSelected($event)"></his-timeline>
 </div>
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
