@@ -55,7 +55,7 @@ export class TimeMenuComponent implements OnInit {
   /** 監聽是否有滑鼠滾動時間軸 */
   @HostListener('scroll', ['$event'])
   onTimelineScroll() {
-    this.#timeMenuService.scrollTimeline(this.elementRef, this.value, this.#isMouseScroll);
+    this.#timeMenuService.scrollHandler(this.elementRef, this.value, this.#isMouseScroll);
   }
 
   /** 確認當前 css */

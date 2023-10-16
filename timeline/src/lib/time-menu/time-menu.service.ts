@@ -14,12 +14,12 @@ export class TimeMenuService {
   }
 
   /** 監聽畫面的滾動，使年份與時間軸達成一致 */
-  scrollTimeline(elementRef: ElementRef, timeItems: TimeItem[], isMouseScrolling: boolean) {
-    const scrollTable = elementRef.nativeElement.querySelector('#scrollTable');
+  scrollHandler(elementRef: ElementRef, timeItems: TimeItem[], isMouseScrolling: boolean) {
+    const scrollContainer = elementRef.nativeElement.querySelector('#scrollContainer');
     const timeline = document.getElementById('timeline');
-    if (!timeline || !scrollTable || timeline.offsetHeight === 0) return;
+    if (!timeline || !scrollContainer || timeline.offsetHeight === 0) return;
 
-    const percent = (scrollTable.scrollTop / timeline.offsetHeight);
+    const percent = (scrollContainer.scrollTop / timeline.offsetHeight);
     const searchLabel = this.#getYearLabel(timeItems, percent);
     this.#openTimeMenu(searchLabel, isMouseScrolling);
   }
@@ -53,15 +53,15 @@ export class TimeMenuService {
   #scrollTo(timeItems: TimeItem[], target: Date) {
     if (!timeItems) return;
 
-    const scrollTable = document.getElementById('scrollTable');
+    const scrollContainer = document.getElementById('scrollContainer');
     const timeline = document.getElementById('timeline');
-    if (!timeline || !scrollTable) return;
+    if (!timeline || !scrollContainer) return;
 
     const selectedIndex = timeItems.findIndex(x => x.date === target);
     const recordLength = timeItems.length;
     const percent = selectedIndex / recordLength;
     const targetHeight = percent * timeline.offsetHeight - 10;
-    scrollTable.scrollTo(0, targetHeight);
+    scrollContainer.scrollTo(0, targetHeight);
   }
 
   /** 依滾輪取得的目前高度去尋找對應的年份 */
