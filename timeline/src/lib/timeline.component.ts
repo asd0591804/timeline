@@ -21,12 +21,12 @@ export class TimelineComponent {
   timeContents!: TimeItem[];
 
   /** 點選了時間軸的項目 */
-  onMenuClick(timeItems: TimeItem[]) {
+  onMenuSelect(timeItems: TimeItem[]) {
     this.timeContents = timeItems;
   }
 
   /** 點選了右邊列表的項目 */
-  onContentClick(timeItem: TimeItem) {
+  onContentSelect(timeItem: TimeItem) {
     this.timeSelect.emit(timeItem);
   }
 

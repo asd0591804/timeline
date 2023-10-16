@@ -30,7 +30,7 @@ export class TimeMenuComponent implements OnInit {
   #timeMenuService: TimeMenuService = inject(TimeMenuService);
 
   /** 為了滾動 timeline 畫面後帶動左邊 yearMonth 的功能而設定 */
-  constructor(private elementRef: ElementRef) {}
+  constructor(private elementRef: ElementRef) {};
 
   ngOnInit(): void {
     this.yearMonth = this.#timeMenuService.getYearMonth(this.value);

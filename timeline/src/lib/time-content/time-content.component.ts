@@ -21,7 +21,7 @@ export class TimeContentComponent {
   @Output() contentSelect: EventEmitter<TimeItem> = new EventEmitter<TimeItem>();
 
   /** 選擇選單項目之一 */
-  onContentClick(timeItem: TimeItem) {
+  onClick(timeItem: TimeItem) {
     this.contentSelect.emit(timeItem);
   }
 }
