@@ -14,10 +14,10 @@ import '@his-base/data-extension';
 })
 export class TimeContentComponent {
 
-  /** 時間軸點選資料的 subRecords，讓其可以顯示在列表上 */
+  /** TimeItems 的 subRecords，讓其可以顯示在列表上 */
   @Input() value!: TimeItem[];
 
-  /** 將在列表上點選的資料傳出 */
+  /** 點選 content 觸發的事件 */
   @Output() contentSelect: EventEmitter<TimeItem> = new EventEmitter<TimeItem>();
 
   /** 選擇選單項目之一 */

@@ -8,8 +8,7 @@ export class TimeMenuService {
 
   /** 取得左側年月列表可讀取 menuitem */
   getYearMonth(timeItems: TimeItem[]) {
-    const sortedValue = this.#sortTime(timeItems);
-    const groupedValue = this.#groupByTime(sortedValue);
+    const groupedValue = this.#groupBy(timeItems);
 
     return this.#getTimeMenus(timeItems, groupedValue);
   }
@@ -25,14 +24,10 @@ export class TimeMenuService {
     this.#openTimeMenu(searchLabel, isMouseScrolling);
   }
 
-  /** 排序資料 */
-  #sortTime(timeItems: TimeItem[]) {
-    return timeItems.sort((x, y) => x.date.getTime() - y.date.getTime());
-  }
-
   /** 將資料分組 */
-  #groupByTime(timeItems: TimeItem[]) {
-    return timeItems.groupBy(x => [x.date.getFullYear()]);
+  #groupBy(timeItems: TimeItem[]) {
+    const sortedValue = timeItems.sort((x, y) => x.date.getTime() - y.date.getTime());
+    return sortedValue.groupBy(x => x.date.getFullYear());
   }
 
   /** 將年份 月份 轉換成 menuitems */
@@ -58,15 +53,15 @@ export class TimeMenuService {
   #scrollTo(timeItems: TimeItem[], target: Date) {
     if (!timeItems) return;
 
-    const scrollBody = document.getElementById('scrollTable');
+    const scrollTable = document.getElementById('scrollTable');
     const timeline = document.getElementById('timeline');
-    if (!timeline || !scrollBody) return;
+    if (!timeline || !scrollTable) return;
 
     const selectedIndex = timeItems.findIndex(x => x.date === target);
     const recordLength = timeItems.length;
     const percent = selectedIndex / recordLength;
     const targetHeight = percent * timeline.offsetHeight - 10;
-    scrollBody.scrollTo(0, targetHeight);
+    scrollTable.scrollTo(0, targetHeight);
   }
 
   /** 依滾輪取得的目前高度去尋找對應的年份 */

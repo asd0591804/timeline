@@ -16,10 +16,10 @@ import { DatePipe, NgClass, NgIf } from '@angular/common';
   styles: [],
 })
 export class TimeMenuComponent implements OnInit {
-  /** 傳入的資料 */
+  /** 時間紀錄 */
   @Input() value!: TimeItem[];
 
-  /** 傳給 time-content 的資料 */
+  /** 點選 menu 觸發的事件 */
   @Output() menuSelect: EventEmitter<TimeItem[]> = new EventEmitter<TimeItem[]>();
 
   yearMonth!: MenuItem[];
