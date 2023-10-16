@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
   title = 'app';
 
   value!: TimeItem[];
-  output!: TimeItem;
+  #output!: TimeItem;
   #appService: AppService = inject(AppService);
 
   ngOnInit() {
@@ -24,6 +24,8 @@ export class AppComponent implements OnInit {
 
   /** 點選了選單的項目 */
   onItemSelect(timeItem: TimeItem) {
-    this.output = timeItem;
+    this.#output = timeItem;
+    /** demo 測試使用 */
+    console.log(this.#output);
   }
 }

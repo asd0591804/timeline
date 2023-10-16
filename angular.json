@@ -79,7 +79,8 @@
               "app/src/assets"
             ],
             "styles": [
-              "app/src/styles.scss"
+              "app/src/styles.scss",
+              "timeline/src/lib/timeline.component.scss"
             ],
             "scripts": []
           },

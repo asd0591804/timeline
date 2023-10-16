@@ -1,11 +1,11 @@
 <div class="card flex justify-content-center scrollItem">
-  <p-listbox [options]="value" [(ngModel)]="selectedValue" optionLabel="title" (onClick)="onContentClick(selectedValue)" [emptyMessage]="' '">
+  <p-listbox #listbox [options]="value" optionLabel="title" (onClick)="onContentClick(listbox.value)" [emptyMessage]="' '">
     <ng-template let-timeItem pTemplate="item" >
       <div class="content-flex">
           <span id="iconlocate" class="material-symbols-outlined icon-frame">
             {{timeItem.icon}}
           </span>
-          <div class="timelist-time"> {{formatDate(timeItem.date)}} </div>
+          <div class="timelist-time"> {{timeItem.date | date:'MM-dd HH:mm'}} </div>
           <div class="timelist-title"> {{timeItem.title}} </div>
       </div>
     </ng-template>

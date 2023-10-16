@@ -7,16 +7,16 @@ import { TimeItem } from 'timeline/src/lib/timeline.interface';
 export class TimeMenuService {
 
   /** 取得左側年月列表可讀取 menuitem */
-  getTimeMenu(timeItems: TimeItem[]) {
-    const sortedValue = this.#sortTimeRecord(timeItems);
-    const groupedValue = this.#groupbyTimeRecord(sortedValue);
+  getYearMonth(timeItems: TimeItem[]) {
+    const sortedValue = this.#sortTime(timeItems);
+    const groupedValue = this.#groupbyTime(sortedValue);
 
-    return this.#convertMenuItems(timeItems, groupedValue);
+    return this.#getTimeMenus(timeItems, groupedValue);
   }
 
   /** 監聽畫面的滾動，使年份與時間軸達成一致 */
-  scrollTimeline(el: ElementRef, timeItems: TimeItem[], isMouseScrolling: boolean) {
-    const scrollTable = el.nativeElement.querySelector('#scrollTable');
+  scrollTimeline(elementRef: ElementRef, timeItems: TimeItem[], isMouseScrolling: boolean) {
+    const scrollTable = elementRef.nativeElement.querySelector('#scrollTable');
     const timeline = document.getElementById('timeline');
     if (!timeline || !scrollTable || timeline.offsetHeight === 0) return;
 
@@ -26,17 +26,36 @@ export class TimeMenuService {
   }
 
   /** 排序資料 */
-  #sortTimeRecord(timeItems: TimeItem[]) {
+  #sortTime(timeItems: TimeItem[]) {
     return timeItems.sort((x, y) => x.date.getTime() - y.date.getTime());
   }
 
   /** 將資料分組 */
-  #groupbyTimeRecord(timeItems: TimeItem[]) {
+  #groupbyTime(timeItems: TimeItem[]) {
     return timeItems.groupBy(x => [x.date.getFullYear()]);
   }
 
+  /** 將年份 月份 轉換成 menuitems */
+  #getTimeMenus(timeItems: TimeItem[], groupedValue: Record<string, TimeItem[]>){
+    return Object.entries(groupedValue).map(([x, y]) => {
+      const label = JSON.parse(x);
+
+      const monthGroup = y.groupBy(z => z.date.getMonth());
+      const items = this.#getTimeItems(timeItems, monthGroup);
+      return { label, items };
+    })
+  }
+
+  /** 獲得月份轉換成 menu 的 items */
+  #getTimeItems(timeItems: TimeItem[], monthGroup: Record<string, TimeItem[]>) {
+    return Object.entries(monthGroup).map(([x, y]) => ({
+      label: (Number(x) + 1).toString().padStart(2, "0"),
+      command: () => this.#scrollTo(timeItems, y[0].date)
+    }));
+  }
+
   /** 點選時間後，跳到對應的時間軸 */
-  #scrollToTarget(timeItems: TimeItem[], target: Date) {
+  #scrollTo(timeItems: TimeItem[], target: Date) {
     if (!timeItems) return;
 
     const scrollBody = document.getElementById('scrollTable');
@@ -73,24 +92,5 @@ export class TimeMenuService {
       view: window,
     });
     yearsPanel.dispatchEvent(clickEvent);
-  }
-
-  /** 將年份 月份 轉換成 menuitems */
-  #convertMenuItems(timeItems: TimeItem[], groupedValue: Record<string, TimeItem[]>){
-    return Object.entries(groupedValue).map(([x, y]) => {
-      const label = JSON.parse(x);
-
-      const monthGroup = y.groupBy(z => z.date.getMonth());
-      const items = this.#getMenuItems(timeItems, monthGroup);
-      return { label, items };
-    })
-  }
-
-  /** 獲得月份轉換成 menuitem 的形式 */
-  #getMenuItems(timeItems: TimeItem[], monthGroup: Record<string, TimeItem[]>) {
-    return Object.entries(monthGroup).map(([x, y]) => ({
-      label: (Number(x) + 1).toString().padStart(2, "0"),
-      command: () => this.#scrollToTarget(timeItems, y[0].date)
-    }));
   }
 }

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { NgClass, NgIf } from '@angular/common';
+import { NgClass, NgIf, DatePipe } from '@angular/common';
 import { ListboxModule } from 'primeng/listbox';
 import { FormsModule } from '@angular/forms';
 import { TimeItem } from 'timeline/src/lib/timeline.interface';
@@ -8,7 +8,7 @@ import '@his-base/data-extension';
 @Component({
   selector: 'his-time-content',
   standalone: true,
-  imports: [NgClass, NgIf, ListboxModule,FormsModule],
+  imports: [NgClass, NgIf, ListboxModule, FormsModule, DatePipe],
   templateUrl: './time-content.component.html',
   styles: [],
 })
@@ -19,13 +19,6 @@ export class TimeContentComponent {
 
   /** 將在列表上點選的資料傳出 */
   @Output() contentSelect: EventEmitter<TimeItem> = new EventEmitter<TimeItem>();
-
-  selectedValue!: TimeItem;
-
-  /** 切換日期格式 */
-  formatDate(date: Date){
-    return date.formatString('MM-DD HH:mm ');
-  }
 
   /** 選擇選單項目之一 */
   onContentClick(timeItem: TimeItem) {
