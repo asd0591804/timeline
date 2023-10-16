@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { TimeMenuComponent } from "./time-menu/time-menu.component";
 import { TimeContentComponent } from "./time-content/time-content.component";
-import { TimeRecord } from './timeline.interface';
+import { TimeItem } from './timeline.interface';
 
 @Component({
     selector: 'his-timeline',
@@ -13,19 +13,21 @@ import { TimeRecord } from './timeline.interface';
 export class TimelineComponent {
 
   /** 輸入給 time-menu 使用的資料 */
-  @Input() value!: TimeRecord[];
+  @Input() value!: TimeItem[];
 
   /** 輸出最終選擇的一筆資料 */
-  @Output() selected: EventEmitter<TimeRecord> = new EventEmitter<TimeRecord>();
+  @Output() timeSelect: EventEmitter<TimeItem> = new EventEmitter<TimeItem>();
 
-  timeContents!: TimeRecord[];
+  timeContents!: TimeItem[];
 
-  onMenuSelect(subRecords: TimeRecord[]) {
-    this.timeContents = subRecords;
+  /** 點選了時間軸的項目 */
+  onMenuClick(timeItems: TimeItem[]) {
+    this.timeContents = timeItems;
   }
 
-  onContentSelect(selectedRecord: TimeRecord) {
-    this.selected.emit(selectedRecord);
+  /** 點選了右邊列表的項目 */
+  onContentClick(timeItem: TimeItem) {
+    this.timeSelect.emit(timeItem);
   }
 
 }

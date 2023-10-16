@@ -2,25 +2,25 @@
 
 <div class="timeMenuLayout">
   <div class="card flex justify-content-center scrollItem">
-      <p-panelMenu [model]="yearMonthMenu" id="yearsPanel"></p-panelMenu>
+      <p-panelMenu [model]="yearMonth" id="yearsPanel"></p-panelMenu>
   </div>
 
   <div class="card scrollItem" id="scrollTable" (scroll)="onTimelineScroll()" (mouseover)="onMouseOver()" (mouseleave)="onMouseLeave()">
-    <p-timeline [value]="timelineSubject" id="timeline">
-      <ng-template pTemplate="marker" let-record>
-        <span class="custom-marker shadow-2 dot-style green-dot" [ngClass]="{'orange-dot': record.isSelected}"></span>
-        <span class="custom-connect eachconnent" [ngClass]="{'eachconnent-select': record.isSelected}"></span>
+    <p-timeline [value]="value" id="timeline">
+      <ng-template pTemplate="marker" let-item>
+        <span class="custom-marker shadow-2 dot-style green-dot" [ngClass]="{'orange-dot': checkCss(item)}"></span>
+        <span class="custom-connect eachconnent" [ngClass]="{'eachconnent-select': checkCss(item)}"></span>
       </ng-template>
-      <ng-template pTemplate="content" let-record>
+      <ng-template pTemplate="content" let-item>
         <div style="display: flex;">
-          <button (click)="onTimelineClick(record)" class="button-time" [ngClass]="{'button-time-selected': record.isSelected}">
+          <button (click)="onTimelineClick(item)" class="button-time" [ngClass]="{'button-time-selected': checkCss(item)}">
             <div style="line-height: 150%;">
-              {{ record.time }} <br>
-              <span class="fontsize" [ngClass]="{'fontsize-selected': record.isSelected}">{{ record.subtitle }}</span><br>
-              <span class="fontsize-caption" [ngClass]="{'fontsize-caption-selected': record.isSelected}">{{ record.title }}</span>
+              {{ formatDate(item.date) }} <br>
+              <span class="fontsize" [ngClass]="{'fontsize-selected': checkCss(item)}">{{ item.subtitle }}</span><br>
+              <span class="fontsize-caption" [ngClass]="{'fontsize-caption-selected': checkCss(item)}">{{ item.title }}</span>
             </div>
           </button>
-          <svg *ngIf="record.isSelected" class="triangle-position"  width="25" height="25" viewBox="-50 -50 300 300" transform="rotate(270) scale(2)">
+          <svg *ngIf="checkCss(item)" class="triangle-position"  width="25" height="25" viewBox="-50 -50 300 300" transform="rotate(270) scale(2)">
             <polygon class="triangle-circle" stroke-linejoin="round" points="100,0 0,200 200,200"/>
           </svg>
         </div>

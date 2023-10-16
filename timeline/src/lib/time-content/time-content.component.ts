@@ -1,9 +1,9 @@
-import { Component, EventEmitter, Input, OnChanges, Output, inject } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { NgClass, NgIf } from '@angular/common';
 import { ListboxModule } from 'primeng/listbox';
 import { FormsModule } from '@angular/forms';
-import { TimeContent, TimeRecord } from 'timeline/src/lib/timeline.interface';
-import { TimeContentService } from './time-content.service';
+import { TimeItem } from 'timeline/src/lib/timeline.interface';
+import '@his-base/data-extension';
 
 @Component({
   selector: 'his-time-content',
@@ -12,25 +12,23 @@ import { TimeContentService } from './time-content.service';
   templateUrl: './time-content.component.html',
   styles: [],
 })
-export class TimeContentComponent implements OnChanges {
+export class TimeContentComponent {
 
   /** 時間軸點選資料的 subRecords，讓其可以顯示在列表上 */
-  @Input() value!: TimeRecord[];
+  @Input() value!: TimeItem[];
 
   /** 將在列表上點選的資料傳出 */
-  @Output() selected: EventEmitter<TimeRecord> = new EventEmitter<TimeRecord>();
+  @Output() contentSelect: EventEmitter<TimeItem> = new EventEmitter<TimeItem>();
 
-  selectedContent!: TimeContent;
-  timeContents!: TimeContent[];
+  selectedValue!: TimeItem;
 
-  #timeContentService: TimeContentService = inject(TimeContentService);
-
-  ngOnChanges(): void {
-    this.timeContents = this.#timeContentService.getTimeContents(this.value);
+  /** 切換日期格式 */
+  formatDate(date: Date){
+    return date.formatString('MM-DD HH:mm ');
   }
 
-  onContentClick(timeContent: TimeContent) {
-    const result = this.#timeContentService.getSelectedRecord(this.value, timeContent);
-    this.selected.emit(result);
+  /** 選擇選單項目之一 */
+  onContentClick(timeItem: TimeItem) {
+    this.contentSelect.emit(timeItem);
   }
 }
