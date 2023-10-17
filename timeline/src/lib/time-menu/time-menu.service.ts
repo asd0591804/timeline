@@ -31,7 +31,7 @@ export class TimeMenuService {
   }
 
   /** 將年份 月份 轉換成 menuitems */
-  #getTimeMenus(timeItems: TimeItem[], groupedValue: Record<string, TimeItem[]>){
+  #getTimeMenus(timeItems: TimeItem[], groupedValue: Record<string, TimeItem[]>) {
     return Object.entries(groupedValue).map(([x, y]) => {
       const label = JSON.parse(x);
 
@@ -45,12 +45,12 @@ export class TimeMenuService {
   #getTimeItems(timeItems: TimeItem[], monthGroup: Record<string, TimeItem[]>) {
     return Object.entries(monthGroup).map(([x, y]) => ({
       label: (Number(x) + 1).toString().padStart(2, "0"),
-      command: () => this.#scrollTo(timeItems, y[0].date)
+      command: () => this.#moveTo(timeItems, y[0].date)
     }));
   }
 
   /** 點選時間後，跳到對應的時間軸 */
-  #scrollTo(timeItems: TimeItem[], target: Date) {
+  #moveTo(timeItems: TimeItem[], target: Date) {
     if (!timeItems) return;
 
     const scrollContainer = document.getElementById('scrollContainer');

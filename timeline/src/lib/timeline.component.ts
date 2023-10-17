@@ -12,17 +12,19 @@ import { TimeItem } from './timeline.interface';
 })
 export class TimelineComponent {
 
-  /** 輸入給 time-menu 使用的資料 */
+  /** 時間紀錄
+   * - 輸入給 time-menu 的資料
+   */
   @Input() value!: TimeItem[];
 
-  /** 輸出最終選擇的一筆資料 */
+  /** 輸出選擇的一筆資料 */
   @Output() timeSelect: EventEmitter<TimeItem> = new EventEmitter<TimeItem>();
 
-  timeContents!: TimeItem[];
+  timeItems!: TimeItem[];
 
-  /** 點選了時間軸的項目 */
+  /** 點選了中間時間軸的項目 */
   onMenuSelect(timeItems: TimeItem[]) {
-    this.timeContents = timeItems;
+    this.timeItems = timeItems;
   }
 
   /** 點選了右邊列表的項目 */

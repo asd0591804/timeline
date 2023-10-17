@@ -14,7 +14,7 @@ import '@his-base/data-extension';
 })
 export class TimeContentComponent {
 
-  /** TimeItems 的 subRecords，讓其可以顯示在列表上 */
+  /** 詳細記錄(subItems)，讓其可以顯示在列表上 */
   @Input() value!: TimeItem[];
 
   /** 點選 content 觸發的事件 */
