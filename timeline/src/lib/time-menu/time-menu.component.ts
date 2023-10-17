@@ -59,7 +59,7 @@ export class TimeMenuComponent implements OnInit {
   }
 
   /** 確認當前 css */
-  switchCss(timeItem: TimeItem) {
+  isItemClicked(timeItem: TimeItem) {
     return timeItem.id === this.clickedId;
   }
 }

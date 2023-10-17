@@ -34,9 +34,9 @@ export class AppService {
       {date: new Date(2020, 5, 17, 3, 24, 0), title: '醫師18' ,subtitle :'住院' ,id :'18', subItems: [{date: new Date(2020, 5, 17, 3, 24, 0), title: '醫師18' ,subtitle :'住院' ,id :'18'}]},
       {date: new Date(2020, 11, 17, 3, 24, 0), title: '醫師19' ,subtitle :'門診' ,id :'19', subItems: [{date: new Date(2020, 11, 17, 3, 24, 0), title: '醫師19' ,subtitle :'門診' ,id :'19'}]},
       {date: new Date(2021, 2, 19, 3, 27, 0), title: '醫師20' ,subtitle :'住院' ,id :'20', subItems: [{date: new Date(2021, 2, 19, 3, 27, 0), title: '醫師20' ,subtitle :'住院' ,id :'20'}]},
-      {date: new Date(2021, 3, 20, 3, 28, 0), title: '醫師21' ,subtitle :'門診' ,id :'id', subItems: [{date: new Date(2021, 3, 20, 3, 28, 0), title: '醫師21' ,subtitle :'門診' ,id :'id'}]},
-      {date: new Date(2021, 4, 21, 3, 28, 0), title: '醫師22' ,subtitle :'住院' ,id :'id', subItems: [{date: new Date(2021, 4, 21, 3, 28, 0), title: '醫師22' ,subtitle :'住院' ,id :'id'}]},
-      {date: new Date(2021, 5, 22, 3, 29, 0), title: '醫師23' ,subtitle :'門診' ,id :'id', subItems: [{date:new Date(2021, 5, 22, 3, 29, 0), title: '醫師23' ,subtitle :'門診' ,id :'id'}]},
+      {date: new Date(2021, 3, 20, 3, 28, 0), title: '醫師21' ,subtitle :'門診' ,id :'21', subItems: [{date: new Date(2021, 3, 20, 3, 28, 0), title: '醫師21' ,subtitle :'門診' ,id :'id'}]},
+      {date: new Date(2021, 4, 21, 3, 28, 0), title: '醫師22' ,subtitle :'住院' ,id :'22', subItems: [{date: new Date(2021, 4, 21, 3, 28, 0), title: '醫師22' ,subtitle :'住院' ,id :'id'}]},
+      {date: new Date(2021, 5, 22, 3, 29, 0), title: '醫師23' ,subtitle :'門診' ,id :'23', subItems: [{date:new Date(2021, 5, 22, 3, 29, 0), title: '醫師23' ,subtitle :'門診' ,id :'id'}]},
     ];
 
   }

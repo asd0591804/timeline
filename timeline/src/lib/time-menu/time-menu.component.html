@@ -8,19 +8,19 @@
   <div class="card scrollItem" id="scrollContainer" (scroll)="onTimelineScroll()" (mouseover)="onMouseOver()" (mouseleave)="onMouseLeave()">
     <p-timeline [value]="value" id="timeline">
       <ng-template pTemplate="marker" let-item>
-        <span class="custom-marker shadow-2 dot-style green-dot" [ngClass]="{'orange-dot': switchCss(item)}"></span>
-        <span class="custom-connect eachconnent" [ngClass]="{'eachconnent-select': switchCss(item)}"></span>
+        <span class="custom-marker shadow-2 dot-style green-dot" [ngClass]="{'orange-dot': isItemClicked(item)}"></span>
+        <span class="custom-connect eachconnent" [ngClass]="{'eachconnent-select': isItemClicked(item)}"></span>
       </ng-template>
       <ng-template pTemplate="content" let-item>
-        <div style="display: flex;">
-          <button (click)="onTimelineClick(item)" class="button-time" [ngClass]="{'button-time-selected': switchCss(item)}">
-            <div style="line-height: 150%;">
+        <div class="content-flex">
+          <button (click)="onTimelineClick(item)" class="button-time" [ngClass]="{'button-time-selected': isItemClicked(item)}">
+            <div class="line-height">
               {{ item.date | date:'MM-dd' }} <br>
-              <span class="fontsize" [ngClass]="{'fontsize-selected': switchCss(item)}">{{ item.subtitle }}</span><br>
-              <span class="fontsize-caption" [ngClass]="{'fontsize-caption-selected': switchCss(item)}">{{ item.title }}</span>
+              <span class="fontsize" [ngClass]="{'fontsize-selected': isItemClicked(item)}">{{ item.subtitle }}</span><br>
+              <span class="fontsize-caption" [ngClass]="{'fontsize-caption-selected': isItemClicked(item)}">{{ item.title }}</span>
             </div>
           </button>
-          <svg *ngIf="switchCss(item)" class="triangle-position"  width="25" height="25" viewBox="-50 -50 300 300" transform="rotate(270) scale(2)">
+          <svg *ngIf="isItemClicked(item)" class="triangle-position"  width="25" height="25" viewBox="-50 -50 300 300" transform="rotate(270) scale(2)">
             <polygon class="triangle-circle" stroke-linejoin="round" points="100,0 0,200 200,200"/>
           </svg>
         </div>

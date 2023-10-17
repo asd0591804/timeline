@@ -1,14 +1,13 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { NgClass, NgIf, DatePipe } from '@angular/common';
 import { ListboxModule } from 'primeng/listbox';
-import { FormsModule } from '@angular/forms';
 import { TimeItem } from 'timeline/src/lib/timeline.interface';
 import '@his-base/data-extension';
 
 @Component({
   selector: 'his-time-content',
   standalone: true,
-  imports: [NgClass, NgIf, ListboxModule, FormsModule, DatePipe],
+  imports: [NgClass, NgIf, ListboxModule, DatePipe],
   templateUrl: './time-content.component.html',
   styles: [],
 })

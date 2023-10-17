@@ -1,12 +1,12 @@
 <div class="card flex justify-content-center scrollItem">
-  <p-listbox #listbox [options]="value" optionLabel="title" (onClick)="onClick(listbox.value)" [emptyMessage]="' '">
-    <ng-template let-timeItem pTemplate="item" >
+  <p-listbox #listbox [options]="value" optionLabel="title" (click)="onClick(listbox.value)" [emptyMessage]="' '">
+    <ng-template let-item pTemplate="item" >
       <div class="content-flex">
           <span id="iconlocate" class="material-symbols-outlined icon-frame">
-            {{timeItem.icon}}
+            {{item.icon}}
           </span>
-          <div class="timelist-time"> {{timeItem.date | date:'MM-dd HH:mm'}} </div>
-          <div class="timelist-title"> {{timeItem.title}} </div>
+          <div class="timelist-time"> {{item.date | date:'MM-dd HH:mm'}} </div>
+          <div class="timelist-title"> {{item.title}} </div>
       </div>
     </ng-template>
   </p-listbox>
