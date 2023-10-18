@@ -8,7 +8,7 @@ export class TimeMenuService {
 
   /** 取得左側年月列表可讀取 menuitem */
   getYearMonth(timeItems: TimeItem[]) {
-    const groupedValue = this.#groupBy(timeItems);
+    const groupedValue = this.#group(timeItems);
 
     return this.#getTimeMenus(timeItems, groupedValue);
   }
@@ -25,7 +25,7 @@ export class TimeMenuService {
   }
 
   /** 將資料分組 */
-  #groupBy(timeItems: TimeItem[]) {
+  #group(timeItems: TimeItem[]) {
     const sortedValue = timeItems.sort((x, y) => x.date.getTime() - y.date.getTime());
     return sortedValue.groupBy(x => x.date.getFullYear());
   }

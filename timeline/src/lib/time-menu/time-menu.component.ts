@@ -23,7 +23,7 @@ export class TimeMenuComponent implements OnInit {
   @Output() menuSelect: EventEmitter<TimeItem[]> = new EventEmitter<TimeItem[]>();
 
   yearMonth!: MenuItem[];
-  clickedId!: string;
+  clickId!: string;
 
   #isMouseScroll!: boolean;
 
@@ -38,7 +38,7 @@ export class TimeMenuComponent implements OnInit {
 
   /** 點選了中間時間軸的項目 */
   onTimelineClick(timeItem: TimeItem) {
-    this.clickedId = timeItem.id;
+    this.clickId = timeItem.id;
     this.menuSelect.emit(timeItem.subItems)
   }
 
@@ -58,8 +58,8 @@ export class TimeMenuComponent implements OnInit {
     this.#timeMenuService.scrollHandler(this.elementRef, this.value, this.#isMouseScroll);
   }
 
-  /** 確認當前 css */
-  isItemClicked(timeItem: TimeItem) {
-    return timeItem.id === this.clickedId;
+  /** 確認是不是被點選的項目 */
+  isItemClick(timeItem: TimeItem) {
+    return timeItem.id === this.clickId;
   }
 }
