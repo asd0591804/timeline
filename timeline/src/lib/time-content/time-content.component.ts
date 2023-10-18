@@ -19,7 +19,9 @@ export class TimeContentComponent {
   /** 點選 content 觸發的事件 */
   @Output() contentSelect: EventEmitter<TimeItem> = new EventEmitter<TimeItem>();
 
-  /** 選擇選單項目之一 */
+  /** 選擇選單項目之一
+   * @param timeItem 點選的紀錄
+   */
   onClick(timeItem: TimeItem) {
     this.contentSelect.emit(timeItem);
   }

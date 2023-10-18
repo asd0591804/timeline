@@ -5,6 +5,9 @@ import { Injectable } from '@angular/core';
 })
 export class AppService {
 
+  /** 模擬從資料庫抓資料
+   * @returns 回傳抓到的資料
+   */
   initial(){
     return [
       {date: new Date(1995, 1, 17, 3, 24, 0), title: '醫師1', subtitle: '急診', id: '1', subItems: [{date: new Date(1995, 1, 17, 3, 24, 0), title: '醫師1', subtitle: '急診', id: '1'}]},

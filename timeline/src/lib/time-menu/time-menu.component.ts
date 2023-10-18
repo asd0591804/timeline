@@ -29,14 +29,21 @@ export class TimeMenuComponent implements OnInit {
 
   #timeMenuService: TimeMenuService = inject(TimeMenuService);
 
-  /** 為了滾動 timeline 畫面後帶動左邊 yearMonth 的功能而設定 */
+  /** 為了滾動 timeline 畫面後帶動左邊 yearMonth 的功能而設定
+   * @param elementRef DOM元素的訪問與操作
+   */
   constructor(private elementRef: ElementRef) {};
 
+  /** 初始化資料
+   * - 將年月，轉換成左邊的菜單，可使用的資料(MenuItems)
+   */
   ngOnInit(): void {
     this.yearMonth = this.#timeMenuService.getYearMonth(this.value);
   }
 
-  /** 點選了中間時間軸的項目 */
+  /** 點選了中間時間軸的項目
+   * @param timeItem 點選的那筆紀錄
+   */
   onTimelineClick(timeItem: TimeItem) {
     this.clickId = timeItem.id;
     this.menuSelect.emit(timeItem.subItems)
@@ -58,7 +65,10 @@ export class TimeMenuComponent implements OnInit {
     this.#timeMenuService.scrollHandler(this.elementRef, this.value, this.#isMouseScroll);
   }
 
-  /** 確認是不是被點選的項目 */
+  /** 確認是不是被點選的項目
+   * @param timeItem 每一筆紀錄
+   * @returns 是或否
+   */
   isItemClick(timeItem: TimeItem) {
     return timeItem.id === this.clickId;
   }

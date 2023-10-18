@@ -16,11 +16,16 @@ export class AppComponent implements OnInit {
   #output!: TimeItem;
   #appService: AppService = inject(AppService);
 
+  /** 初始化資料
+   *  - 從資料庫獲得 TimeItems
+   */
   ngOnInit() {
     this.value = this.#appService.initial();
   }
 
-  /** 點選了選單的項目 */
+  /** 接收最終選擇的資料
+   * @param timeItem 被選擇的那筆資料
+   */
   onTimeSelect(timeItem: TimeItem) {
     this.#output = timeItem;
     /** demo 測試使用 */
