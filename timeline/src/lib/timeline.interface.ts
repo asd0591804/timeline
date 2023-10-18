@@ -1,14 +1,14 @@
 /** 時間紀錄
  * - input進來的原始資料
- * */
+ */
 export interface TimeItem {
-  /** 識別碼 */
+  /** 識別碼 **/
   id: string;
-  /** 時間 */
-  date: Date;
+  /** 時間 **/
+  time: Date;
   /** 標題
    * - 例如: 醫師
-   * */
+   */
   title: string;
   /** 副標題
    * - 例如: 看診類別

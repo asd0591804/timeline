@@ -2,7 +2,7 @@
 
 <div class="timeMenuLayout">
   <div class="card flex justify-content-center scrollItem">
-      <p-panelMenu [model]="yearMonth" id="yearsPanel"></p-panelMenu>
+      <p-panelMenu [model]="yearMonths" id="yearsPanel"></p-panelMenu>
   </div>
 
   <div class="card scrollItem" id="scrollContainer" (scroll)="onTimelineScroll()" (mouseover)="onMouseOver()" (mouseleave)="onMouseLeave()">
@@ -15,7 +15,7 @@
         <div class="content-flex">
           <button (click)="onTimelineClick(item)" class="button-time" [ngClass]="{'button-time-selected': isItemClick(item)}">
             <div class="line-height">
-              {{ item.date | date:'MM-dd' }} <br>
+              {{ item.time | date:'MM-dd' }} <br>
               <span class="fontsize" [ngClass]="{'fontsize-selected': isItemClick(item)}">{{ item.subtitle }}</span><br>
               <span class="fontsize-caption" [ngClass]="{'fontsize-caption-selected': isItemClick(item)}">{{ item.title }}</span>
             </div>

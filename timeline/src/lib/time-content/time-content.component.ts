@@ -13,10 +13,10 @@ import '@his-base/data-extension';
 })
 export class TimeContentComponent {
 
-  /** 詳細記錄，讓其可以顯示在列表上 */
+  /** 詳細記錄，讓其可以顯示在列表上 **/
   @Input() value!: TimeItem[];
 
-  /** 點選 content 觸發的事件 */
+  /** 點選 content 觸發的事件 **/
   @Output() contentSelect: EventEmitter<TimeItem> = new EventEmitter<TimeItem>();
 
   /** 選擇紀錄

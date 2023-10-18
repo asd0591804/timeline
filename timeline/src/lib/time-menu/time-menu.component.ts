@@ -6,7 +6,7 @@ import { TimelineModule } from 'primeng/timeline';
 import { TimeItem } from 'timeline/src/lib/timeline.interface';
 import '@his-base/array-extention';
 import { TimeMenuService } from './time-menu.service';
-import { DatePipe, NgClass, NgIf } from '@angular/common';
+import { DatePipe, NgClass, NgIf, Time } from '@angular/common';
 
 @Component({
   selector: 'his-time-menu',
@@ -16,36 +16,43 @@ import { DatePipe, NgClass, NgIf } from '@angular/common';
   styles: [],
 })
 export class TimeMenuComponent implements OnInit {
-  /** 時間紀錄 */
+  /** 時間紀錄 **/
   @Input() value!: TimeItem[];
 
-  /** 點選 menu 觸發的事件 */
-  @Output() menuSelect!: EventEmitter<TimeItem[]>;
+  /** 點選 menu 觸發的事件 **/
+  @Output() menuSelect: EventEmitter<TimeItem[]> = new EventEmitter<TimeItem[]>();
 
-  yearMonth!: MenuItem[];
-  clickId!: string;
+  yearMonths!: MenuItem[];
+  selectedId!: string;
 
   #isMouseScroll!: boolean;
 
   #timeMenuService: TimeMenuService = inject(TimeMenuService);
+  #elementRef: ElementRef = inject(ElementRef);
 
-  /** 建構式
-   * @param elementRef DOM元素的訪問與操作，為了滾動 timeline 帶動左邊菜單的功能
+  /** 監聽是否有滑鼠滾動時間軸
+   * - 處理畫面上的連動
    */
-  constructor(private elementRef: ElementRef) {};
+  @HostListener('scroll', ['$event'])
+  onTimelineScroll() {
+    this.#timeMenuService.scrollHandler(this.#elementRef, this.value, this.#isMouseScroll);
+  }
 
   /** 初始化資料
-   * - 將年月，轉換成左邊的菜單，可使用的資料(MenuItems)
+   * - 年月轉換成左邊的菜單，可使用的資料(MenuItems)
+   * - 排序 timeline 資料
    */
   ngOnInit(): void {
-    this.yearMonth = this.#timeMenuService.getYearMonth(this.value);
+    this.value.sort((x, y) => x.time.getTime() - y.time.getTime());
+    this.yearMonths = this.#timeMenuService.getYearMonth(this.value);
+
   }
 
   /** 點選了中間時間軸的項目
    * @param timeItem 點選的那筆紀錄
    */
   onTimelineClick(timeItem: TimeItem) {
-    this.clickId = timeItem.id;
+    this.selectedId = timeItem.id;
     this.menuSelect.emit(timeItem.subItems)
   }
 
@@ -63,19 +70,11 @@ export class TimeMenuComponent implements OnInit {
     this.#isMouseScroll = false;
   }
 
-  /** 監聽是否有滑鼠滾動時間軸
-   * - 處理畫面上的連動
-   */
-  @HostListener('scroll', ['$event'])
-  onTimelineScroll() {
-    this.#timeMenuService.scrollHandler(this.elementRef, this.value, this.#isMouseScroll);
-  }
-
   /** 確認是不是被點選的項目
    * @param timeItem 每一筆紀錄
    * @returns true: 是 / false: 否
    */
   isItemClick(timeItem: TimeItem) {
-    return timeItem.id === this.clickId;
+    return timeItem.id === this.selectedId;
   }
 }

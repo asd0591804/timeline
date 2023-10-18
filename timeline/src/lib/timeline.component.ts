@@ -12,12 +12,10 @@ import { TimeItem } from './timeline.interface';
 })
 export class TimelineComponent {
 
-  /** 時間紀錄
-   * - 輸入給 time-menu 的資料
-   */
+  /** 時間紀錄，輸入給 time-menu 的資料 **/
   @Input() value!: TimeItem[];
 
-  /** 輸出選擇的一筆資料 */
+  /** 輸出選擇的一筆資料 **/
   @Output() timeSelect: EventEmitter<TimeItem> = new EventEmitter<TimeItem>();
 
   timeItems!: TimeItem[];
