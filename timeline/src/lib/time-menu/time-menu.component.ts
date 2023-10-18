@@ -20,7 +20,7 @@ export class TimeMenuComponent implements OnInit {
   @Input() value!: TimeItem[];
 
   /** 點選 menu 觸發的事件 */
-  @Output() menuSelect: EventEmitter<TimeItem[]> = new EventEmitter<TimeItem[]>();
+  @Output() menuSelect!: EventEmitter<TimeItem[]>;
 
   yearMonth!: MenuItem[];
   clickId!: string;
@@ -29,8 +29,8 @@ export class TimeMenuComponent implements OnInit {
 
   #timeMenuService: TimeMenuService = inject(TimeMenuService);
 
-  /** 為了滾動 timeline 畫面後帶動左邊 yearMonth 的功能而設定
-   * @param elementRef DOM元素的訪問與操作
+  /** 建構式
+   * @param elementRef DOM元素的訪問與操作，為了滾動 timeline 帶動左邊菜單的功能
    */
   constructor(private elementRef: ElementRef) {};
 
@@ -49,17 +49,23 @@ export class TimeMenuComponent implements OnInit {
     this.menuSelect.emit(timeItem.subItems)
   }
 
-  /** 當滑鼠移入時間軸 */
+  /** 當滑鼠移入時間軸
+   * - 設定滑鼠滾動狀態
+   */
   onMouseOver() {
     this.#isMouseScroll = true;
   }
 
-  /** 當滑鼠移出時間軸 */
+  /** 當滑鼠移出時間軸
+   * - 設定滑鼠滾動狀態
+   */
   onMouseLeave() {
     this.#isMouseScroll = false;
   }
 
-  /** 監聽是否有滑鼠滾動時間軸 */
+  /** 監聽是否有滑鼠滾動時間軸
+   * - 處理畫面上的連動
+   */
   @HostListener('scroll', ['$event'])
   onTimelineScroll() {
     this.#timeMenuService.scrollHandler(this.elementRef, this.value, this.#isMouseScroll);
@@ -67,7 +73,7 @@ export class TimeMenuComponent implements OnInit {
 
   /** 確認是不是被點選的項目
    * @param timeItem 每一筆紀錄
-   * @returns 是或否
+   * @returns true: 是 / false: 否
    */
   isItemClick(timeItem: TimeItem) {
     return timeItem.id === this.clickId;

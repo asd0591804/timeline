@@ -13,11 +13,11 @@ import { AppService } from './app.service';
 })
 export class AppComponent implements OnInit {
   value!: TimeItem[];
-  #output!: TimeItem;
+
   #appService: AppService = inject(AppService);
 
   /** 初始化資料
-   *  - 從資料庫獲得 TimeItems
+   * - 向後端查詢 TimeItems
    */
   ngOnInit() {
     this.value = this.#appService.initial();
@@ -27,8 +27,7 @@ export class AppComponent implements OnInit {
    * @param timeItem 被選擇的那筆資料
    */
   onTimeSelect(timeItem: TimeItem) {
-    this.#output = timeItem;
-    /** demo 測試使用 */
-    console.log(this.#output);
+    // demo 測試使用
+    console.log(timeItem);
   }
 }

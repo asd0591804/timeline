@@ -5,8 +5,8 @@ import { Injectable } from '@angular/core';
 })
 export class AppService {
 
-  /** 模擬從資料庫抓資料
-   * @returns 回傳抓到的資料
+  /** 模擬向後端查詢資料
+   * @returns 查詢結果
    */
   initial(){
     return [

@@ -23,14 +23,14 @@ export class TimelineComponent {
   timeItems!: TimeItem[];
 
   /** 點選了中間時間軸的項目
-   * @param timeItems 詳細資料，(subItems)
+   * @param timeItems 詳細資料，TimeItem 的 subItems
    */
   onMenuSelect(timeItems: TimeItem[]) {
     this.timeItems = timeItems;
   }
 
   /** 點選了右邊列表的項目
-   * @param timeItem 選擇的最終一筆資料
+   * @param timeItem 最終選擇的資料
    */
   onContentSelect(timeItem: TimeItem) {
     this.timeSelect.emit(timeItem);
