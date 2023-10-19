@@ -11,7 +11,7 @@ export class TimeMenuService {
    * @param timeItems 所有的資料
    * @returns 年月菜單
    */
-  getYearMonth(timeItems: TimeItem[]): MenuItem[] {
+  getYearMonths(timeItems: TimeItem[]): MenuItem[] {
 
     const groupYears = timeItems.groupBy(x => x.time.getFullYear());
 

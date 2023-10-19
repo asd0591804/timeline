@@ -6,7 +6,7 @@ import { TimelineModule } from 'primeng/timeline';
 import { TimeItem } from 'timeline/src/lib/timeline.interface';
 import '@his-base/array-extention';
 import { TimeMenuService } from './time-menu.service';
-import { DatePipe, NgClass, NgIf, Time } from '@angular/common';
+import { DatePipe, NgClass, NgIf } from '@angular/common';
 
 @Component({
   selector: 'his-time-menu',
@@ -44,7 +44,7 @@ export class TimeMenuComponent implements OnInit {
    */
   ngOnInit(): void {
     this.value.sort((x, y) => x.time.getTime() - y.time.getTime());
-    this.yearMonths = this.#timeMenuService.getYearMonth(this.value);
+    this.yearMonths = this.#timeMenuService.getYearMonths(this.value);
 
   }
 
