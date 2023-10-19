@@ -4,7 +4,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Timeline 畫面
 
-![](./app/src/assets/timeline.gif)
+![](./app-showcase/src/assets/timeline.gif)
 
 ## Timeline 使用說明
 

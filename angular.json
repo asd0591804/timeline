@@ -59,27 +59,27 @@
           "standalone": true
         }
       },
-      "root": "app",
-      "sourceRoot": "app/src",
+      "root": "app-showcase",
+      "sourceRoot": "app-showcase/src",
       "prefix": "his",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/app",
-            "index": "app/src/index.html",
-            "main": "app/src/main.ts",
+            "outputPath": "dist/app-showcase",
+            "index": "app-showcase/src/index.html",
+            "main": "app-showcase/src/main.ts",
             "polyfills": [
               "zone.js"
             ],
-            "tsConfig": "app/tsconfig.app.json",
+            "tsConfig": "app-showcase/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
-              "app/src/favicon.ico",
-              "app/src/assets"
+              "app-showcase/src/favicon.ico",
+              "app-showcase/src/assets"
             ],
             "styles": [
-              "app/src/styles.scss",
+              "app-showcase/src/styles.scss",
               "timeline/src/lib/timeline.component.scss"
             ],
             "scripts": []
@@ -139,11 +139,11 @@
             "tsConfig": "app/tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [
-              "app/src/favicon.ico",
-              "app/src/assets"
+              "app-showcase/src/favicon.ico",
+              "app-showcase/src/assets"
             ],
             "styles": [
-              "app/src/styles.scss"
+              "app-showcase/src/styles.scss"
             ],
             "scripts": []
           }
