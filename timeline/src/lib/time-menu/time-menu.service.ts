@@ -13,15 +13,30 @@ export class TimeMenuService {
    */
   getYearMonths(timeItems: TimeItem[]): MenuItem[] {
 
-    const groupYears = timeItems.groupBy(x => x.time.getFullYear());
+    const years = timeItems.groupBy(x => x.time.getFullYear());
 
-    return Object.entries(groupYears).map(([x,y]) => {
-      const label = `${x}`;
+    const menuItems = Object.entries(years).map(([label,times]) => {
 
-      const groupMonths = y.groupBy(z => z.time.getMonth());
-      const items = this.#getMonthItems(timeItems, groupMonths);
+      const months = times.groupBy(x => x.time.getMonth());
+      const items = Object.entries(months).map(([x, y]) => ({ label: this.#getMonth(x), command: () => this.#moveTo(timeItems, y[0].id)}));
       return {label, items};
     });
+
+    return menuItems;
+  }
+
+  /**
+   * 取得月份
+   * @param month
+   * @returns
+   */
+  #getMonth(month: string): string {
+    return (Number(month) + 1).toString().padStart(2, "0");
+    // month = month + 1;
+    // if(month < 10){
+    //   return `00${month}`;
+    // }
+    // return `0${month}`;
   }
 
   /** 監聽畫面的滾動，使年份與時間軸達成一致
@@ -38,19 +53,6 @@ export class TimeMenuService {
     const percent = (scrollContainer.scrollTop / timeline.offsetHeight);
     const searchLabel = this.#getYearLabel(timeItems, percent);
     this.#openTimeMenu(searchLabel, isMouseScroll);
-  }
-
-  /** 獲得月份轉換成的 items
-   * @param timeItems 傳入 timeline 的資料
-   * @param record 以月份劃分的資料
-   * @returns 菜單所使用的 items
-   */
-  #getMonthItems(timeItems: TimeItem[], record: Record<string, TimeItem[]>){
-
-    return Object.entries(record).map(([x, y]) => ({
-      label: (Number(x) + 1).toString().padStart(2, "0"),
-      command: () => this.#moveTo(timeItems, y[0].id)
-    }));
   }
 
   /** 點選時間後，跳到對應的時間軸
