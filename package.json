@@ -23,7 +23,6 @@
     "@angular/platform-browser-dynamic": "^16.1.0",
     "@angular/router": "^16.1.0",
     "@his-base/array-extention": "git+https://gitlab.aservice.com.tw/hpc-his/base/array-extension.git",
-    "@his-base/data-extension": "git+https://gitlab.aservice.com.tw/hpc-his/base/date-extension.git",
     "eslint-config-prettier": "^9.0.0",
     "lodash": "^4.17.21",
     "postcss": "^8.4.31",

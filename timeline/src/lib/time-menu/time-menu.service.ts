@@ -1,7 +1,6 @@
 import { ElementRef, Injectable } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { TimeItem } from 'timeline/src/lib/timeline.interface';
-// import * as _ from 'lodash';
 import '@his-base/array-extention';
 
 @Injectable({
@@ -19,7 +18,7 @@ export class TimeMenuService {
     const menuItems = Object.entries(years).map(([label,times]) => {
 
       const months = times.devideBy(x => this.#getMonth(x.time.getMonth()));
-      const items = months.map(y =>  ({label: y.title, commamd: () => this.#moveTo(timeItems, y.data[0].id)}));
+      const items = months.map(y =>  ({label: y.title, command: () => this.#moveTo(timeItems, y.data[0].id)}));
       return {label, items};
     });
 

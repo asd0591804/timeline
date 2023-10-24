@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { NgClass, NgIf, DatePipe } from '@angular/common';
 import { ListboxModule } from 'primeng/listbox';
 import { TimeItem } from 'timeline/src/lib/timeline.interface';
-import '@his-base/data-extension';
 
 @Component({
   selector: 'his-time-content',

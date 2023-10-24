@@ -4,7 +4,6 @@ import { PanelMenuModule } from 'primeng/panelmenu';
 import { MenuItem } from 'primeng/api';
 import { TimelineModule } from 'primeng/timeline';
 import { TimeItem } from 'timeline/src/lib/timeline.interface';
-import '@his-base/array-extention';
 import { TimeMenuService } from './time-menu.service';
 import { DatePipe, NgClass, NgIf } from '@angular/common';
 
