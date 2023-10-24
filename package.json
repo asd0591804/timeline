@@ -12,6 +12,9 @@
     "compodoc:build-and-serve": "compodoc -p tsconfig.doc.json -s",
     "compodoc:serve": "compodoc -s"
   },
+  "files": [
+    "dist"
+  ],
   "private": true,
   "dependencies": {
     "@angular/animations": "^16.1.0",
