@@ -16,39 +16,22 @@ export class TimeMenuService {
   getYearMonths(timeItems: TimeItem[]): MenuItem[] {
 
     const years = timeItems.groupBy(x => x.time.getFullYear());
-    // const tmp = timeItems.devideBy(x => x.time.getFullYear());
-    // console.log(tmp);
-
     const menuItems = Object.entries(years).map(([label,times]) => {
 
-      // console.log(times);
-      // const tmp2 = times.devideBy(x => x.time.getFullYear());
-      // const tmp2 = times.devideBy(x => this.#getMonth(x.time.getMonth()));
-      // console.log('tmp',tmp2);
-      // console.log('tmp2',tmp2);
-
-      const months = times.groupBy(x => x.time.getMonth());
-      // const months = _.groupBy(times, item => item.time.getMonth());
-      const items = Object.entries(months).map(([x, y]) => ({ label: this.#getMonth(x), command: () => this.#moveTo(timeItems, y[0].id)}));
+      const months = times.devideBy(x => this.#getMonth(x.time.getMonth()));
+      const items = months.map(y =>  ({label: y.title, commamd: () => this.#moveTo(timeItems, y.data[0].id)}));
       return {label, items};
     });
 
     return menuItems;
   }
 
-  /**
-   * 取得月份
-   * @param month
-   * @returns
+  /** 取得月份以及不足十位數補零
+   * @param month date.getMonth() 所得
+   * @returns 正確的月份
    */
-  #getMonth(month: string): string {
-    return (Number(month) + 1).toString().padStart(2, "0");
-    // return (month + 1).toString().padStart(2, "0");
-    // month = month + 1;
-    // if(month < 10){
-    //   return `00${month}`;
-    // }
-    // return `0${month}`;
+  #getMonth(month: number): string {
+    return (month + 1).toString().padStart(2, "0");
   }
 
   /** 監聽畫面的滾動，使年份與時間軸達成一致
